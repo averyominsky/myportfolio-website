@@ -182,14 +182,17 @@
       margin-bottom: 18px;
       font-size: 0.85rem;
       color: var(--muted);
+        align-items: center; 
     }
 
-    .dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--muted);
-    }
+ .dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--muted);
+  display: block;
+  flex-shrink: 0;
+}
 
     .project-info p {
       color: var(--muted);
@@ -208,6 +211,8 @@
     @media (max-width: 640px) {
       .hero, .projects { padding-inline: 24px; }
     }
+
+ 
 
   </style>
 </head>
