@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ---------------- RESET ---------------- */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ---------------- VARIABLES ---------------- */
+
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --border: #e8e8e8;
+      --accent: #c1df70;
+
+      --radius: 20px;
+      --transition: 0.25s ease;
+    }
+
+    /* ---------------- BASE ---------------- */
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    svg {
+      display: block;
+    }
+
+    /* ---------------- ANIMATIONS ---------------- */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------------- TOPBAR ---------------- */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 22px 40px;
+
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid var(--border);
+
+      animation: fadeDown 0.5s ease both;
+    }
+
+    .topbar-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .menu-btn {
+      position: absolute;
+      left: 32px;
+
+      background: transparent;
+      border: none;
+      color: var(--text);
+
+      cursor: pointer;
+    }
+
+    .menu-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ---------------- HERO ---------------- */
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 80px;
+
+      min-height: 90vh;
+
+      padding: 80px 7vw;
+
+      border-bottom: 1px solid var(--border);
+
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-illustration {
+      max-width: 460px;
+      width: 100%;
+      justify-self: center;
+    }
+
+    .hero-illustration svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-content h1 {
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+
+      margin-bottom: 28px;
+    }
+
+    .hero-content .accent {
+      color: var(--accent);
+    }
+
+    .hero-content p {
+      max-width: 520px;
+
+      font-size: 1.05rem;
+      line-height: 1.75;
+
+      color: var(--muted);
+
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    /* ---------------- BUTTONS ---------------- */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 14px 24px;
+
+      border-radius: 999px;
+
+      font-size: 0.95rem;
+      font-weight: 500;
+
+      transition:
+        background var(--transition),
+        color var(--transition),
+        transform var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--text);
+      color: white;
+    }
+
+    /* ---------------- PROJECT SECTION ---------------- */
+
+    .projects {
+      width: 100%;
+
+      padding: 80px 7vw;
+
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 36px;
+
+      padding: 28px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background: #fafafa;
+
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .project-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .project-card:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+
+    .project-card:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    /* ---------------- PROJECT THUMB ---------------- */
+
+    .project-thumb {
+      height: 220px;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    /* iHeard */
+
+    .thumb-iheard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      height: 100%;
+    }
+
+    .thumb-iheard .cell {
+      display: grid;
+      place-items: center;
+    }
+
+    .thumb-iheard .cell:nth-child(1) {
+      background: #e8b84b;
+    }
+
+    .thumb-iheard .cell:nth-child(2) {
+      background: #3d7068;
+    }
+
+    .thumb-iheard .cell:nth-child(3),
+    .thumb-iheard .cell:nth-child(6) {
+      background: #e05a3a;
+    }
+
+    .thumb-iheard .cell:nth-child(4) {
+      background: #0b4685;
+    }
+
+    .thumb-iheard .cell:nth-child(5) {
+      background: #6ab8a8;
+    }
+
+    /* Kaptivate */
+
+    .thumb-kaptivate {
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+
+      background:
+        radial-gradient(circle at 60% 40%, #5a72c4 0%, #3a4d8a 70%);
+    }
+
+    .kaptivate-logo {
+      width: 72px;
+      height: 72px;
+
+      border-radius: 50%;
+      background: white;
+    }
+
+    .thumb-kaptivate span {
+      color: white;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+    }
+
+    /* Navalny */
+
+    .thumb-navalny {
+      height: 100%;
+
+      display: grid;
+      place-items: center;
+
+      background: #1a1018;
+    }
+
+    .book {
+      width: 130px;
+      height: 170px;
+
+      position: relative;
+
+      background: #8b1a2a;
+
+      border-radius: 2px 8px 8px 2px;
+
+      overflow: hidden;
+
+      box-shadow: -4px 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .book::before {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+
+      width: 10px;
+
+      background: #6a1020;
+    }
+
+    .book-text {
+      position: absolute;
+
+      top: 14px;
+      left: 18px;
+      right: 10px;
+
+      font-size: 7px;
+      line-height: 1.5;
+      font-style: italic;
+
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* ---------------- PROJECT INFO ---------------- */
+
+    .project-info h2 {
+      font-family: "Instrument Serif", serif;
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.1;
+
+      margin-bottom: 12px;
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-bottom: 18px;
+
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 4px;
+      height: 4px;
+
+      border-radius: 50%;
+
+      background: var(--muted);
+    }
+
+    .project-info p {
+      max-width: 520px;
+
+      color: var(--muted);
+      line-height: 1.7;
+
+      margin-bottom: 28px;
+    }
+
+    /* ---------------- RESPONSIVE ---------------- */
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-content p {
+        margin-inline: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar,
+      .hero,
+      .projects {
+        padding-inline: 24px;
+      }
+
+      .menu-btn {
+        left: 20px;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+      }
+
+      .project-info h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOPBAR -->
+
+  <div class="topbar">
+
+    <button class="menu-btn" aria-label="Open menu">
+      <svg viewBox="0 0 18 18" fill="none">
+        <line x1="2" y1="5" x2="16" y2="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        <line x1="2" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        <line x1="2" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </svg>
+    </button>
+
+    <span class="topbar-name">Avery Ominsky</span>
+
+  </div>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+   
+
+    <div class="hero-content">
+
+      <h1>
+    I Design for Human        <br />
+        <span class="accent">Connection.</span>
+      </h1>
+
+      <p>
+      I approach design as both a research process and a storytelling medium, combining strategy, visual identity, and human-centered thinking.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary">
+          View My Work
+        </a>
+
+        <a href="#" class="btn btn-secondary">
+          Learn About Me
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PROJECTS -->
+
+  <section class="projects">
+
+    <!-- PROJECT 1 -->
+
+    <article class="project-card">
+
+      <div class="project-thumb">
+
+        <div class="thumb-iheard">
+
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+          <div class="cell"></div>
+
+        </div>
+
+      </div>
+
+      <div class="project-info">
+
+        <h2>Character Identity System</h2>
+
+        <div class="project-meta">
+          <span>Spring 2026</span>
+          <span class="dot"></span>
+          <span>Visual Design</span>
+        </div>
+
+        <p>
+          Reaserch on dynamics constructed through 
+          nonverbal communication, relying on gesture and props 
+          as visual signifiers.
+        </p>
+
+        <a href="#" class="btn btn-secondary">
+          Explore
+        </a>
+
+      </div>
+
+    </article>
+
+    <!-- PROJECT 2 -->
+
+    <article class="project-card">
+
+      <div class="project-thumb">
+
+        <div class="thumb-kaptivate">
+
+          <div class="kaptivate-logo"></div>
+
+          <span>KAPTIVATE</span>
+
+        </div>
+
+      </div>
+
+      <div class="project-info">
+
+        <h2>Book → Website</h2>
+
+        <div class="project-meta">
+          <span>Spring 2026</span>
+          <span class="dot"></span>
+          <span>UI & UX
+        </div>
+
+        <p>
+         Inspired by Italo Calvino's Invisible Cities, this site celebrates the work of 10 artists across various mediums.
+        </p>
+
+        <a href="#" class="btn btn-secondary">
+          Explore
+        </a>
+
+      </div>
+
+    </article>
+
+    <!-- PROJECT 3 -->
+
+    <article class="project-card">
+
+      <div class="project-thumb">
+
+        <div class="thumb-navalny">
+
+          <div class="book">
+
+            <div class="book-text">
+              NAVALNY AND THE FIGHT AGAINST THE PUTIN REGIME'S
+              TRUTH NARRATIVE
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="project-info">
+
+        <h2>Insider Trading Is Going to Get People Killed</h2>
+
+        <div class="project-meta">
+          <span>Spring 2026</span>
+          <span class="dot"></span>
+          <span>Typography &amp; Editorial Design</span>
+        </div>
+
+        <p>
+          A book exploring how war markets are a national-security threat through narrative, typography, and editorial
+          design.
+        </p>
+
+        <a href="#" class="btn btn-secondary">
+          Explore
+        </a>
+
+      </div>
+
+    </article>
+
+  </section>
+
+</body>
+</html>
