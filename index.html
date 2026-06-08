@@ -80,6 +80,79 @@
       cursor: pointer;
     }
 
+    .menu-btn {
+  position: absolute;
+  left: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: transform 0.2s ease;
+}
+
+.menu-btn:active {
+  transform: scale(0.9);
+}
+
+/* Dropdown */
+
+.dropdown-menu {
+  position: absolute;
+  top: 70px;
+  left: 24px;
+  width: 280px;
+
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease,
+    visibility .25s ease;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  padding: 12px 14px;
+  border-radius: 12px;
+  transition: all .2s ease;
+  font-size: .95rem;
+}
+
+.dropdown-menu a:hover {
+  background: #f5f5f5;
+  transform: translateX(4px);
+}
+
+.dropdown-menu a:active {
+  transform: scale(0.97);
+}
+
+.menu-section {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  padding: 12px 14px 4px;
+}
+
     /* ---------------- HERO ---------------- */
 
     .hero {
@@ -132,6 +205,10 @@
     .btn-secondary {
       border: 1px solid var(--text);
     }
+
+    .menu-btn.open {
+  transform: rotate(90deg);
+}
 
     /* ---------------- PROJECTS ---------------- */
 
@@ -200,6 +277,77 @@
       margin-bottom: 28px;
     }
 
+
+
+    /* SIDEBAR MENU */
+.dropdown-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 300px;
+  height: 100vh;
+
+  background: white;
+  border-right: 1px solid var(--border);
+
+  padding: 80px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+
+  z-index: 999;
+}
+
+/* open state */
+.dropdown-menu.active {
+  transform: translateX(0);
+}
+
+/* links */
+.dropdown-menu a {
+  padding: 12px 14px;
+  border-radius: 12px;
+  transition: all .2s ease;
+  font-size: .95rem;
+}
+
+.dropdown-menu a:hover {
+  background: #f5f5f5;
+  transform: translateX(6px);
+}
+
+/* section labels */
+.menu-section {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  padding: 14px 14px 4px;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+
+  font-size: 22px;
+  line-height: 1;
+
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  cursor: pointer;
+  color: var(--text);
+}
+
+
+
     /* ---------------- RESPONSIVE ---------------- */
 
     @media (max-width: 960px) {
@@ -212,18 +360,83 @@
       .hero, .projects { padding-inline: 24px; }
     }
 
- 
+
+
 
   </style>
 </head>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  const closeMenu = document.getElementById("closeMenu");
+
+  function openMenu() {
+    dropdownMenu.classList.add("active");
+  }
+
+  function closeMenuFn() {
+    dropdownMenu.classList.remove("active");
+  }
+
+  menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openMenu();
+  });
+
+  if (closeMenu) {
+    closeMenu.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeMenuFn();
+    });
+  }
+
+  document.addEventListener("click", (e) => {
+    if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+      closeMenuFn();
+    }
+  });
+
+  
+});
+
+
+</script>
+
+
 <body>
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <button class="menu-btn">☰</button>
-    <span class="topbar-name">Avery Ominsky</span>
-  </div>
+ <!-- TOPBAR -->
+<div class="topbar">
+<button class="menu-btn" id="menuToggle">☰</button>
+
+<div class="dropdown-menu" id="dropdownMenu">
+<div class="menu-header">
+  <button class="close-btn" id="closeMenu">✕</button>
+</div>
+  <a href="play.html">Play</a>
+
+  <div class="menu-section">Projects</div>
+  <a href="pitchbook.html">Character Identity System</a>
+  <a href="scanvas.html">Book → Website</a>
+  <a href="chick.html">Typography</a>
+
+  <div class="menu-section">About Me</div>
+  <a href="about.html">Learn About Me</a>
+
+  <div class="menu-section">Contact</div>
+  <a href="mailto:avery@example.com">Email</a>
+  <a href="resume.pdf">Resume</a>
+  <a href="https://linkedin.com">LinkedIn</a>
+</div>
+
+
+
+  <span class="topbar-name">Avery Ominsky</span>
+</div>
+
+
 
   <!-- HERO -->
   <section class="hero">
@@ -317,6 +530,7 @@
     </article>
 
   </section>
+
 
 </body>
 </html>
