@@ -11,12 +11,7 @@
   />
 
   <style>
-    /* ---------------- RESET ---------------- */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg: #ffffff;
@@ -39,351 +34,269 @@
 
     a { text-decoration: none; color: inherit; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-    /* ---------------- TOPBAR ---------------- */
+    /* ── TOPBAR ── */
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: center;
       padding: 22px 40px;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       animation: fadeDown 0.5s ease both;
     }
-
-    .topbar-name {
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
-
+    .topbar-name { font-size: 0.95rem; font-weight: 500; }
     .menu-btn {
-      position: absolute;
-      left: 32px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-size: 1.4rem;
-      transition: transform 0.2s ease;
+      position: absolute; left: 32px;
+      background: transparent; border: none; cursor: pointer;
+      font-size: 1.4rem; transition: transform 0.2s ease;
     }
-
     .menu-btn:active { transform: scale(0.9); }
 
-    /* SIDEBAR MENU */
     .dropdown-menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 300px;
-      height: 100vh;
-      background: white;
-      border-right: 1px solid var(--border);
+      position: fixed; top: 0; left: 0;
+      width: 300px; height: 100vh;
+      background: white; border-right: 1px solid var(--border);
       padding: 80px 18px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+      display: flex; flex-direction: column; gap: 6px;
       transform: translateX(-100%);
       transition: transform 0.3s ease;
       z-index: 999;
     }
-
     .dropdown-menu.active { transform: translateX(0); }
-
     .dropdown-menu a {
-      padding: 12px 14px;
-      border-radius: 12px;
-      transition: all 0.2s ease;
-      font-size: 0.95rem;
+      padding: 12px 14px; border-radius: 12px;
+      transition: all 0.2s ease; font-size: 0.95rem;
     }
-
-    .dropdown-menu a:hover {
-      background: #f5f5f5;
-      transform: translateX(6px);
-    }
-
-    .dropdown-menu a:active { transform: scale(0.97); }
-
+    .dropdown-menu a:hover { background: #f5f5f5; transform: translateX(6px); }
     .menu-section {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
+      font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted);
       padding: 14px 14px 4px;
     }
-
     .close-btn {
-      position: absolute;
-      left: 18px;
-      top: 18px;
-      font-size: 22px;
-      line-height: 1;
-      background: transparent;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      color: var(--text);
+      position: absolute; left: 18px; top: 18px;
+      font-size: 22px; background: transparent; border: none;
+      cursor: pointer; color: var(--text);
     }
 
-    /* ---------------- PAGE HEADER ---------------- */
+    /* ── PAGE HEADER ── */
     .play-header {
       padding: 72px 7vw 48px;
       border-bottom: 1px solid var(--border);
       animation: fadeUp 0.7s ease both;
     }
-
     .play-header-inner {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
+      display: flex; align-items: flex-end;
+      justify-content: space-between; gap: 24px; flex-wrap: wrap;
     }
-
     .play-title {
       font-family: "Instrument Serif", serif;
       font-size: clamp(3.5rem, 10vw, 8rem);
-      line-height: 0.92;
-      font-weight: 400;
-      letter-spacing: -0.02em;
+      line-height: 0.92; font-weight: 400; letter-spacing: -0.02em;
     }
-
-    .play-title em {
-      font-style: italic;
-      color: var(--muted);
-    }
-
+    .play-title em { font-style: italic; color: var(--muted); }
     .play-desc {
-      max-width: 340px;
-      font-size: 0.95rem;
-      line-height: 1.75;
-      color: var(--muted);
-      padding-bottom: 6px;
+      max-width: 340px; font-size: 0.95rem;
+      line-height: 1.75; color: var(--muted); padding-bottom: 6px;
     }
 
-    /* ---------------- HINT BAR ---------------- */
+    /* ── HINT BAR ── */
     .hint-bar {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 14px 7vw;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.8rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
+      display: flex; align-items: center; gap: 20px;
+      padding: 14px 7vw; border-bottom: 1px solid var(--border);
+      font-size: 0.8rem; color: var(--muted); letter-spacing: 0.05em;
     }
-
     .hint-bar span { display: flex; align-items: center; gap: 6px; }
-
     .hint-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      display: inline-block;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
     }
 
-    /* ---------------- GRID ---------------- */
-    .grid-section {
-      padding: 48px 7vw 80px;
+    /* ── GRID ── */
+    /*
+      Masonry-style using CSS columns.
+      Each card is display:inline-block so it naturally
+      sizes to its content (the image's natural aspect ratio).
+      overflow:visible on the column so the float animation
+      isn't clipped.
+    */
+    .grid-stage {
+      padding: 60px 7vw 100px;
       animation: fadeUp 0.9s ease both 0.1s;
     }
 
     .play-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      columns: 3;
+      column-gap: 28px;
     }
 
-    /* ---------------- CELL ---------------- */
-    .cell {
+    /* ── CARD ── */
+    /*
+      width: 100% fills the column.
+      height: auto — no fixed aspect-ratio — so the card
+      shrinks/grows to wrap the image exactly.
+      break-inside: avoid keeps cards from splitting across columns.
+      margin-bottom creates the row gap.
+      overflow: visible so the floating transform peeks out.
+    */
+    .card {
+      display: block;
+      width: 100%;
+      height: auto;          /* KEY: natural height */
+      position: relative;
       border-radius: var(--radius);
       border: 1px solid var(--border);
       background: #fafafa;
-      position: relative;
-      overflow: hidden;
+      overflow: visible;     /* don't clip the floating card */
       cursor: pointer;
-      aspect-ratio: 1;
-      animation: floatCell var(--float-dur, 5s) ease-in-out var(--float-delay, 0s) infinite alternate;
-      transition: border-color var(--transition), box-shadow var(--transition), transform 0.35s cubic-bezier(.23,1,.32,1);
+      break-inside: avoid;
+      margin-bottom: 28px;
+
+      /* float animation */
+      animation: floatCard var(--float-dur, 5s) ease-in-out var(--float-delay, 0s) infinite alternate;
+      transition: box-shadow 0.3s ease, border-color 0.25s;
+      will-change: transform;
     }
 
-    @keyframes floatCell {
-      from { transform: translateY(0) rotate(var(--rot-a, -0.3deg)); }
-      to   { transform: translateY(var(--float-y, -7px)) rotate(var(--rot-b, 0.3deg)); }
+    @keyframes floatCard {
+      from {
+        transform: translateY(0) rotate(var(--rot-a, -0.35deg));
+        box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+      }
+      to {
+        transform: translateY(var(--float-y, -12px)) rotate(var(--rot-b, 0.35deg));
+        box-shadow: 0 18px 44px rgba(0,0,0,0.11);
+      }
     }
 
-    .cell:hover {
-      border-color: #aaa;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    .card:hover {
+      border-color: #bbb;
+      box-shadow: 0 24px 56px rgba(0,0,0,0.14) !important;
       animation-play-state: paused;
-      transform: scale(1.02) translateY(-3px);
-      z-index: 10;
+      transform: translateY(-14px) scale(1.02) rotate(0deg) !important;
+      z-index: 50;
     }
 
-    .cell.drag-over {
+    .card.drag-over {
       border-color: var(--text);
       background: #f0f0f0;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
       animation-play-state: paused;
     }
 
-    /* layout variants */
-    .cell.wide { grid-column: span 2; aspect-ratio: 2/1; }
-    .cell.tall { grid-row: span 2;    aspect-ratio: 1/2; }
-
-    /* empty state */
-    .cell-empty {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: opacity 0.2s;
+    /* ── INNER WRAP ── clips the image to rounded corners ── */
+    /*
+      We need a child that clips the image (overflow:hidden + border-radius)
+      while the parent card stays overflow:visible for the float.
+    */
+    .card-inner {
+      border-radius: calc(var(--radius) - 1px);
+      overflow: hidden;
+      position: relative;
+      /* height:auto so it wraps the image naturally */
     }
 
-    .cell-empty-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: var(--muted);
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .cell:hover .cell-empty-icon {
-      border-color: var(--text);
-      background: var(--accent);
-      color: var(--text);
-    }
-
-    .cell-empty-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* filled state */
-    .cell img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    /* ── IMAGE ── */
+    .card-inner img {
       display: block;
-      transition: transform 0.5s cubic-bezier(.23,1,.32,1), filter 0.3s;
+      width: 100%;
+      height: auto;          /* natural aspect ratio preserved */
+      transition: filter 0.3s ease, transform 0.4s cubic-bezier(.23,1,.32,1);
     }
 
-    .cell:hover img {
-      transform: scale(1.05);
+    .card:hover .card-inner img {
       filter: brightness(0.88);
+      transform: scale(1.03);
     }
 
-    /* overlay on hover */
-    .cell-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      display: flex;
-      align-items: flex-end;
-      padding: 16px;
+    /* ── HOVER OVERLAY ── */
+    .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.52) 0%, transparent 55%);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: flex-end; padding: 16px;
+      border-radius: calc(var(--radius) - 1px);
+      pointer-events: none;
+    }
+    .card:hover .card-overlay { opacity: 1; }
+    .card-tag {
+      background: var(--accent); color: var(--text);
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 999px;
     }
 
-    .cell:hover .cell-overlay { opacity: 1; }
+    /* ── REMOVE BTN ── */
+    .card-remove {
+      position: absolute; top: 10px; right: 10px;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: white; border: 1px solid var(--border);
+      color: var(--text); font-size: 12px;
+      display: none; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0;
+      transition: opacity 0.2s, background 0.2s;
+      z-index: 10;
+    }
+    .card:hover .card-remove { opacity: 1; }
+    .card-remove:hover { background: #111; color: white; border-color: #111; }
 
-    .cell-overlay-tag {
-      background: var(--accent);
-      color: var(--text);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 999px;
+    /* ── EMPTY STATE ── */
+    /*
+      When no image, give the card a fixed placeholder height
+      so it's still clickable. Once an image loads, height:auto takes over.
+    */
+    .card.empty .card-inner {
+      min-height: 200px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
     }
 
-    /* remove button */
-    .cell-remove {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: white;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.2s, background 0.2s, border-color 0.2s;
-      z-index: 5;
+    .card-add-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid var(--border); background: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--muted);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .card:hover .card-add-icon {
+      background: var(--accent); border-color: var(--accent); color: var(--text);
+    }
+    .card-label {
+      font-size: 0.72rem; color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase;
     }
 
-    .cell:hover .cell-remove { opacity: 1; }
-
-    .cell-remove:hover {
-      background: #111;
-      color: white;
-      border-color: #111;
-    }
-
-    /* hidden file input */
     .file-input { display: none; }
 
-    /* ---------------- FOOTER NOTE ---------------- */
+    /* ── FOOTER ── */
     .play-footer {
       padding: 32px 7vw;
       border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      color: var(--muted);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.85rem; color: var(--muted);
     }
-
     .play-footer a {
-      color: var(--text);
-      font-weight: 500;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      color: var(--text); font-weight: 500;
+      text-decoration: underline; text-underline-offset: 3px;
     }
 
-    /* ---------------- RESPONSIVE ---------------- */
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .play-grid { grid-template-columns: repeat(2, 1fr); }
-      .cell.wide { grid-column: span 2; }
-      .cell.tall { grid-row: auto; aspect-ratio: 1; }
+      .play-grid { columns: 2; column-gap: 20px; }
+      .card { margin-bottom: 20px; }
       .play-header-inner { flex-direction: column; align-items: flex-start; }
-      .play-title { font-size: clamp(3rem, 14vw, 5rem); }
     }
-
     @media (max-width: 480px) {
-      .play-grid { grid-template-columns: 1fr; }
-      .cell.wide, .cell.tall { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
-      .grid-section, .play-header { padding-inline: 20px; }
+      .play-grid { columns: 1; }
+      .grid-stage, .play-header { padding-inline: 20px; }
     }
   </style>
 </head>
@@ -393,7 +306,6 @@
   <!-- TOPBAR -->
   <div class="topbar">
     <button class="menu-btn" id="menuToggle">☰</button>
-
     <div class="dropdown-menu" id="dropdownMenu">
       <button class="close-btn" id="closeMenu">✕</button>
       <a href="play.html">Play</a>
@@ -408,7 +320,6 @@
       <a href="resume.pdf">Resume</a>
       <a href="https://linkedin.com">LinkedIn</a>
     </div>
-
     <span class="topbar-name">Avery Ominsky</span>
   </div>
 
@@ -424,12 +335,12 @@
 
   <!-- HINT BAR -->
   <div class="hint-bar">
-    <span><span class="hint-dot"></span> Click any cell to upload an image</span>
-    <span><span class="hint-dot"></span> Or drag & drop directly onto a cell</span>
+    <span><span class="hint-dot"></span> Click any card to upload</span>
+    <span><span class="hint-dot"></span> Or drag & drop an image</span>
   </div>
 
   <!-- GRID -->
-  <section class="grid-section">
+  <section class="grid-stage">
     <div class="play-grid" id="playGrid"></div>
   </section>
 
@@ -443,126 +354,132 @@
 
   <script>
     /* ── MENU ── */
-    const menuToggle  = document.getElementById('menuToggle');
+    const menuToggle   = document.getElementById('menuToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
-    const closeMenu   = document.getElementById('closeMenu');
-
+    const closeMenuBtn = document.getElementById('closeMenu');
     menuToggle.addEventListener('click', e => { e.stopPropagation(); dropdownMenu.classList.add('active'); });
-    closeMenu.addEventListener('click',  e => { e.stopPropagation(); dropdownMenu.classList.remove('active'); });
-    document.addEventListener('click',   e => {
-      if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+    closeMenuBtn.addEventListener('click', e => { e.stopPropagation(); dropdownMenu.classList.remove('active'); });
+    document.addEventListener('click', e => {
+      if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target))
         dropdownMenu.classList.remove('active');
-      }
     });
 
-    /* ── GRID CONFIG ── */
-    const GRID_CONFIG = [
-      { type: 'wide',   label: 'hero image' },
-      { type: 'normal', label: 'image 02' },
-      { type: 'tall',   label: 'image 03' },
-      { type: 'normal', label: 'image 04' },
-      { type: 'normal', label: 'image 05' },
-      { type: 'normal', label: 'image 06' },
-      { type: 'normal', label: 'image 07' },
-      { type: 'wide',   label: 'image 08' },
-    ];
-
+    /* ── BUILD 9 CARDS ── */
     const FLOATS = [
-      { dur: '5.2s', delay: '0s',    y: '-7px',  ra: '-0.25deg', rb: '0.3deg'  },
-      { dur: '4.6s', delay: '0.5s',  y: '-9px',  ra: '0.2deg',   rb: '-0.35deg' },
-      { dur: '6s',   delay: '0.2s',  y: '-6px',  ra: '-0.3deg',  rb: '0.2deg'  },
-      { dur: '4.8s', delay: '1.1s',  y: '-8px',  ra: '0.35deg',  rb: '-0.2deg' },
-      { dur: '5.5s', delay: '0.7s',  y: '-10px', ra: '-0.2deg',  rb: '0.4deg'  },
-      { dur: '4.3s', delay: '1.4s',  y: '-7px',  ra: '0.3deg',   rb: '-0.25deg' },
-      { dur: '5.8s', delay: '0.3s',  y: '-8px',  ra: '-0.35deg', rb: '0.2deg'  },
-      { dur: '4.9s', delay: '0.9s',  y: '-6px',  ra: '0.2deg',   rb: '-0.3deg' },
+      { dur: '5.2s', delay: '0s',   y: '-12px', ra: '-0.4deg',  rb: '0.35deg'  },
+      { dur: '4.6s', delay: '0.6s', y: '-10px', ra: '0.3deg',   rb: '-0.4deg'  },
+      { dur: '6.1s', delay: '0.2s', y: '-14px', ra: '-0.35deg', rb: '0.3deg'   },
+      { dur: '4.9s', delay: '1.2s', y: '-11px', ra: '0.4deg',   rb: '-0.3deg'  },
+      { dur: '5.6s', delay: '0.8s', y: '-13px', ra: '-0.3deg',  rb: '0.45deg'  },
+      { dur: '4.3s', delay: '1.5s', y: '-9px',  ra: '0.35deg',  rb: '-0.35deg' },
+      { dur: '5.8s', delay: '0.4s', y: '-14px', ra: '-0.45deg', rb: '0.3deg'   },
+      { dur: '4.7s', delay: '1.0s', y: '-10px', ra: '0.3deg',   rb: '-0.45deg' },
+      { dur: '5.4s', delay: '0.3s', y: '-12px', ra: '-0.35deg', rb: '0.4deg'   },
+      { dur: '4.8s', delay: '0.7s', y: '-11px', ra: '0.4deg',   rb: '-0.3deg'  },
+      { dur: '5.9s', delay: '1.3s', y: '-13px', ra: '-0.3deg',  rb: '0.4deg'   },
+      { dur: '4.4s', delay: '0.5s', y: '-10px', ra: '0.35deg',  rb: '-0.4deg'  },
+      { dur: '6.2s', delay: '1.1s', y: '-14px', ra: '-0.4deg',  rb: '0.35deg'  },
+      { dur: '5.0s', delay: '0.9s', y: '-11px', ra: '0.3deg',   rb: '-0.35deg' },
+      { dur: '4.5s', delay: '1.6s', y: '-12px', ra: '-0.35deg', rb: '0.3deg'   },
     ];
 
     const grid      = document.getElementById('playGrid');
     const fileInput = document.getElementById('fileInput');
-    let activeCellIdx = null;
+    let activeIdx   = null;
 
-    GRID_CONFIG.forEach((cfg, i) => {
-      const cell = document.createElement('div');
-      cell.className = 'cell' + (cfg.type === 'wide' ? ' wide' : '') + (cfg.type === 'tall' ? ' tall' : '');
-      cell.dataset.idx = i;
-
+    for (let i = 0; i < 15; i++) {
       const f = FLOATS[i];
-      cell.style.setProperty('--float-dur',   f.dur);
-      cell.style.setProperty('--float-delay', f.delay);
-      cell.style.setProperty('--float-y',     f.y);
-      cell.style.setProperty('--rot-a',       f.ra);
-      cell.style.setProperty('--rot-b',       f.rb);
 
-      cell.innerHTML = `
-        <div class="cell-empty">
-          <div class="cell-empty-icon">+</div>
-          <span class="cell-empty-label">${cfg.label}</span>
+      const card = document.createElement('div');
+      card.className = 'card empty';
+      card.dataset.idx = i;
+      card.style.setProperty('--float-dur',   f.dur);
+      card.style.setProperty('--float-delay', f.delay);
+      card.style.setProperty('--float-y',     f.y);
+      card.style.setProperty('--rot-a',       f.ra);
+      card.style.setProperty('--rot-b',       f.rb);
+
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-add-icon">+</div>
+          <span class="card-label">${String(i + 1).padStart(2, '0')}</span>
         </div>
-        <div class="cell-overlay">
-          <span class="cell-overlay-tag">play</span>
-        </div>
-        <button class="cell-remove" title="Remove image" style="display:none" aria-label="Remove image">✕</button>
+        <div class="card-overlay"><span class="card-tag">play</span></div>
+        <button class="card-remove" aria-label="Remove">✕</button>
       `;
 
-      /* click to upload */
-      cell.addEventListener('click', e => {
-        if (e.target.classList.contains('cell-remove')) return;
-        activeCellIdx = i;
+      card.addEventListener('click', e => {
+        if (e.target.closest('.card-remove')) return;
+        activeIdx = i;
         fileInput.click();
       });
 
-      /* remove */
-      cell.querySelector('.cell-remove').addEventListener('click', e => {
+      card.querySelector('.card-remove').addEventListener('click', e => {
         e.stopPropagation();
-        clearCell(cell);
+        clearCard(card);
       });
 
-      /* drag & drop */
-      cell.addEventListener('dragover', e => { e.preventDefault(); cell.classList.add('drag-over'); });
-      cell.addEventListener('dragleave', () => cell.classList.remove('drag-over'));
-      cell.addEventListener('drop', e => {
+      card.addEventListener('dragover',  e => { e.preventDefault(); card.classList.add('drag-over'); });
+      card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
+      card.addEventListener('drop', e => {
         e.preventDefault();
-        cell.classList.remove('drag-over');
+        card.classList.remove('drag-over');
         const file = e.dataTransfer.files[0];
-        if (file && file.type.startsWith('image/')) loadImage(cell, file);
+        if (file && file.type.startsWith('image/')) loadImage(card, file);
       });
 
-      grid.appendChild(cell);
-    });
+      grid.appendChild(card);
+    }
 
     fileInput.addEventListener('change', () => {
-      if (fileInput.files.length && activeCellIdx !== null) {
-        const cell = grid.children[activeCellIdx];
-        loadImage(cell, fileInput.files[0]);
+      if (fileInput.files.length && activeIdx !== null) {
+        loadImage(grid.children[activeIdx], fileInput.files[0]);
         fileInput.value = '';
-        activeCellIdx = null;
+        activeIdx = null;
       }
     });
 
-    function loadImage(cell, file) {
+    function loadImage(card, file) {
       const reader = new FileReader();
       reader.onload = ev => {
-        let img = cell.querySelector('img');
-        if (!img) {
-          img = document.createElement('img');
-          img.alt = 'Play image';
-          cell.insertBefore(img, cell.firstChild);
-        }
+        const inner = card.querySelector('.card-inner');
+
+        // clear placeholder content
+        inner.innerHTML = '';
+
+        // image — width:100%, height:auto → card wraps to natural size
+        const img = document.createElement('img');
+        img.alt = 'Play image';
         img.src = ev.target.result;
-        cell.classList.add('has-image');
-        cell.querySelector('.cell-empty').style.display = 'none';
-        cell.querySelector('.cell-remove').style.display = 'flex';
+        inner.appendChild(img);
+
+        card.classList.remove('empty');
+        card.querySelector('.card-remove').style.display = 'flex';
+
+        // overlay lives inside inner so it clips correctly
+        const ov = card.querySelector('.card-overlay');
+        inner.appendChild(ov);
       };
       reader.readAsDataURL(file);
     }
 
-    function clearCell(cell) {
-      const img = cell.querySelector('img');
+    function clearCard(card) {
+      const inner = card.querySelector('.card-inner');
+      const img   = inner.querySelector('img');
       if (img) img.remove();
-      cell.classList.remove('has-image');
-      cell.querySelector('.cell-empty').style.display = 'flex';
-      cell.querySelector('.cell-remove').style.display = 'none';
+
+      // restore placeholder
+      inner.innerHTML = `
+        <div class="card-add-icon">+</div>
+        <span class="card-label">${String(Number(card.dataset.idx) + 1).padStart(2,'0')}</span>
+      `;
+
+      // move overlay back outside inner (or just recreate it)
+      card.querySelector('.card-overlay') || card.insertAdjacentHTML('beforeend',
+        `<div class="card-overlay"><span class="card-tag">play</span></div>`);
+
+      card.classList.add('empty');
+      card.querySelector('.card-remove').style.display = 'none';
     }
   </script>
 
