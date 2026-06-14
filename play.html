@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Play — Avery Ominsky</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ---------------- RESET ---------------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --border: #e8e8e8;
+      --accent: #c1df70;
+      --radius: 20px;
+      --transition: 0.25s ease;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------------- TOPBAR ---------------- */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 40px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown 0.5s ease both;
+    }
+
+    .topbar-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .menu-btn {
+      position: absolute;
+      left: 32px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: transform 0.2s ease;
+    }
+
+    .menu-btn:active { transform: scale(0.9); }
+
+    /* SIDEBAR MENU */
+    .dropdown-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100vh;
+      background: white;
+      border-right: 1px solid var(--border);
+      padding: 80px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 999;
+    }
+
+    .dropdown-menu.active { transform: translateX(0); }
+
+    .dropdown-menu a {
+      padding: 12px 14px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+      transform: translateX(6px);
+    }
+
+    .dropdown-menu a:active { transform: scale(0.97); }
+
+    .menu-section {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      padding: 14px 14px 4px;
+    }
+
+    .close-btn {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      font-size: 22px;
+      line-height: 1;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* ---------------- PAGE HEADER ---------------- */
+    .play-header {
+      padding: 72px 7vw 48px;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .play-header-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .play-title {
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.92;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .play-title em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .play-desc {
+      max-width: 340px;
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--muted);
+      padding-bottom: 6px;
+    }
+
+    /* ---------------- HINT BAR ---------------- */
+    .hint-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 14px 7vw;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .hint-bar span { display: flex; align-items: center; gap: 6px; }
+
+    .hint-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    /* ---------------- GRID ---------------- */
+    .grid-section {
+      padding: 48px 7vw 80px;
+      animation: fadeUp 0.9s ease both 0.1s;
+    }
+
+    .play-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    /* ---------------- CELL ---------------- */
+    .cell {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: #fafafa;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 1;
+      animation: floatCell var(--float-dur, 5s) ease-in-out var(--float-delay, 0s) infinite alternate;
+      transition: border-color var(--transition), box-shadow var(--transition), transform 0.35s cubic-bezier(.23,1,.32,1);
+    }
+
+    @keyframes floatCell {
+      from { transform: translateY(0) rotate(var(--rot-a, -0.3deg)); }
+      to   { transform: translateY(var(--float-y, -7px)) rotate(var(--rot-b, 0.3deg)); }
+    }
+
+    .cell:hover {
+      border-color: #aaa;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      animation-play-state: paused;
+      transform: scale(1.02) translateY(-3px);
+      z-index: 10;
+    }
+
+    .cell.drag-over {
+      border-color: var(--text);
+      background: #f0f0f0;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      animation-play-state: paused;
+    }
+
+    /* layout variants */
+    .cell.wide { grid-column: span 2; aspect-ratio: 2/1; }
+    .cell.tall { grid-row: span 2;    aspect-ratio: 1/2; }
+
+    /* empty state */
+    .cell-empty {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: opacity 0.2s;
+    }
+
+    .cell-empty-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--muted);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .cell:hover .cell-empty-icon {
+      border-color: var(--text);
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    .cell-empty-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* filled state */
+    .cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(.23,1,.32,1), filter 0.3s;
+    }
+
+    .cell:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.88);
+    }
+
+    /* overlay on hover */
+    .cell-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+
+    .cell:hover .cell-overlay { opacity: 1; }
+
+    .cell-overlay-tag {
+      background: var(--accent);
+      color: var(--text);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    /* remove button */
+    .cell-remove {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+      z-index: 5;
+    }
+
+    .cell:hover .cell-remove { opacity: 1; }
+
+    .cell-remove:hover {
+      background: #111;
+      color: white;
+      border-color: #111;
+    }
+
+    /* hidden file input */
+    .file-input { display: none; }
+
+    /* ---------------- FOOTER NOTE ---------------- */
+    .play-footer {
+      padding: 32px 7vw;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .play-footer a {
+      color: var(--text);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ---------------- RESPONSIVE ---------------- */
+    @media (max-width: 768px) {
+      .play-grid { grid-template-columns: repeat(2, 1fr); }
+      .cell.wide { grid-column: span 2; }
+      .cell.tall { grid-row: auto; aspect-ratio: 1; }
+      .play-header-inner { flex-direction: column; align-items: flex-start; }
+      .play-title { font-size: clamp(3rem, 14vw, 5rem); }
+    }
+
+    @media (max-width: 480px) {
+      .play-grid { grid-template-columns: 1fr; }
+      .cell.wide, .cell.tall { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
+      .grid-section, .play-header { padding-inline: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <button class="menu-btn" id="menuToggle">☰</button>
+
+    <div class="dropdown-menu" id="dropdownMenu">
+      <button class="close-btn" id="closeMenu">✕</button>
+      <a href="play.html">Play</a>
+      <div class="menu-section">Projects</div>
+      <a href="pitchbook.html">Character Identity System</a>
+      <a href="scanvas.html">Book → Website</a>
+      <a href="chick.html">Typography</a>
+      <div class="menu-section">About Me</div>
+      <a href="about.html">Learn About Me</a>
+      <div class="menu-section">Contact</div>
+      <a href="mailto:avery@example.com">Email</a>
+      <a href="resume.pdf">Resume</a>
+      <a href="https://linkedin.com">LinkedIn</a>
+    </div>
+
+    <span class="topbar-name">Avery Ominsky</span>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <header class="play-header">
+    <div class="play-header-inner">
+      <h1 class="play-title">Play<em>.</em></h1>
+      <p class="play-desc">
+        A space for experiments, side projects, and things that don't fit anywhere else — but felt worth making.
+      </p>
+    </div>
+  </header>
+
+  <!-- HINT BAR -->
+  <div class="hint-bar">
+    <span><span class="hint-dot"></span> Click any cell to upload an image</span>
+    <span><span class="hint-dot"></span> Or drag & drop directly onto a cell</span>
+  </div>
+
+  <!-- GRID -->
+  <section class="grid-section">
+    <div class="play-grid" id="playGrid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="play-footer">
+    <span>Avery Ominsky — Play</span>
+    <a href="index.html">← Back to portfolio</a>
+  </footer>
+
+  <input type="file" class="file-input" id="fileInput" accept="image/*">
+
+  <script>
+    /* ── MENU ── */
+    const menuToggle  = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const closeMenu   = document.getElementById('closeMenu');
+
+    menuToggle.addEventListener('click', e => { e.stopPropagation(); dropdownMenu.classList.add('active'); });
+    closeMenu.addEventListener('click',  e => { e.stopPropagation(); dropdownMenu.classList.remove('active'); });
+    document.addEventListener('click',   e => {
+      if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        dropdownMenu.classList.remove('active');
+      }
+    });
+
+    /* ── GRID CONFIG ── */
+    const GRID_CONFIG = [
+      { type: 'wide',   label: 'hero image' },
+      { type: 'normal', label: 'image 02' },
+      { type: 'tall',   label: 'image 03' },
+      { type: 'normal', label: 'image 04' },
+      { type: 'normal', label: 'image 05' },
+      { type: 'normal', label: 'image 06' },
+      { type: 'normal', label: 'image 07' },
+      { type: 'wide',   label: 'image 08' },
+    ];
+
+    const FLOATS = [
+      { dur: '5.2s', delay: '0s',    y: '-7px',  ra: '-0.25deg', rb: '0.3deg'  },
+      { dur: '4.6s', delay: '0.5s',  y: '-9px',  ra: '0.2deg',   rb: '-0.35deg' },
+      { dur: '6s',   delay: '0.2s',  y: '-6px',  ra: '-0.3deg',  rb: '0.2deg'  },
+      { dur: '4.8s', delay: '1.1s',  y: '-8px',  ra: '0.35deg',  rb: '-0.2deg' },
+      { dur: '5.5s', delay: '0.7s',  y: '-10px', ra: '-0.2deg',  rb: '0.4deg'  },
+      { dur: '4.3s', delay: '1.4s',  y: '-7px',  ra: '0.3deg',   rb: '-0.25deg' },
+      { dur: '5.8s', delay: '0.3s',  y: '-8px',  ra: '-0.35deg', rb: '0.2deg'  },
+      { dur: '4.9s', delay: '0.9s',  y: '-6px',  ra: '0.2deg',   rb: '-0.3deg' },
+    ];
+
+    const grid      = document.getElementById('playGrid');
+    const fileInput = document.getElementById('fileInput');
+    let activeCellIdx = null;
+
+    GRID_CONFIG.forEach((cfg, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'cell' + (cfg.type === 'wide' ? ' wide' : '') + (cfg.type === 'tall' ? ' tall' : '');
+      cell.dataset.idx = i;
+
+      const f = FLOATS[i];
+      cell.style.setProperty('--float-dur',   f.dur);
+      cell.style.setProperty('--float-delay', f.delay);
+      cell.style.setProperty('--float-y',     f.y);
+      cell.style.setProperty('--rot-a',       f.ra);
+      cell.style.setProperty('--rot-b',       f.rb);
+
+      cell.innerHTML = `
+        <div class="cell-empty">
+          <div class="cell-empty-icon">+</div>
+          <span class="cell-empty-label">${cfg.label}</span>
+        </div>
+        <div class="cell-overlay">
+          <span class="cell-overlay-tag">play</span>
+        </div>
+        <button class="cell-remove" title="Remove image" style="display:none" aria-label="Remove image">✕</button>
+      `;
+
+      /* click to upload */
+      cell.addEventListener('click', e => {
+        if (e.target.classList.contains('cell-remove')) return;
+        activeCellIdx = i;
+        fileInput.click();
+      });
+
+      /* remove */
+      cell.querySelector('.cell-remove').addEventListener('click', e => {
+        e.stopPropagation();
+        clearCell(cell);
+      });
+
+      /* drag & drop */
+      cell.addEventListener('dragover', e => { e.preventDefault(); cell.classList.add('drag-over'); });
+      cell.addEventListener('dragleave', () => cell.classList.remove('drag-over'));
+      cell.addEventListener('drop', e => {
+        e.preventDefault();
+        cell.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) loadImage(cell, file);
+      });
+
+      grid.appendChild(cell);
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length && activeCellIdx !== null) {
+        const cell = grid.children[activeCellIdx];
+        loadImage(cell, fileInput.files[0]);
+        fileInput.value = '';
+        activeCellIdx = null;
+      }
+    });
+
+    function loadImage(cell, file) {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        let img = cell.querySelector('img');
+        if (!img) {
+          img = document.createElement('img');
+          img.alt = 'Play image';
+          cell.insertBefore(img, cell.firstChild);
+        }
+        img.src = ev.target.result;
+        cell.classList.add('has-image');
+        cell.querySelector('.cell-empty').style.display = 'none';
+        cell.querySelector('.cell-remove').style.display = 'flex';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearCell(cell) {
+      const img = cell.querySelector('img');
+      if (img) img.remove();
+      cell.classList.remove('has-image');
+      cell.querySelector('.cell-empty').style.display = 'flex';
+      cell.querySelector('.cell-remove').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
