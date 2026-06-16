@@ -220,7 +220,33 @@
 
     .file-input { display: none; }
 
-    /* ── FOOTER ── */
+    /* ── LIGHTBOX ── */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.lightbox.active {
+  opacity: 1; pointer-events: all;
+}
+.lightbox img {
+  max-width: 90vw; max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(.23,1,.32,1);
+}
+.lightbox.active img {
+  transform: scale(1);
+}
+
+
+
+/* ── FOOTER ── */
     .play-footer {
       padding: 32px 7vw;
       border-top: 1px solid var(--border);
@@ -244,6 +270,11 @@
     }
   </style>
 </head>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightboxImg" src="" alt="Enlarged view" />
+</div>
+
 
 <body>
 
@@ -413,7 +444,28 @@
         dropdownMenu.classList.remove('active');
     });
 
-    /* ── BUILD 15 UPLOAD CARDS ── */
+    /* ── LIGHTBOX ── */
+const lightbox    = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+
+document.querySelectorAll('.card:not(.empty) img').forEach(img => {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', e => {
+    e.stopPropagation();
+    lightboxImg.src = img.src;
+    lightbox.classList.add('active');
+  });
+});
+
+lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') lightbox.classList.remove('active');
+});
+
+
+
+/* ── BUILD 15 UPLOAD CARDS ── */
     const FLOATS = [
       { dur: '4.9s', delay: '1.2s', y: '-11px', ra: '0.4deg',   rb: '-0.3deg'  },
       { dur: '5.6s', delay: '0.8s', y: '-13px', ra: '-0.3deg',  rb: '0.45deg'  },
