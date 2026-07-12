@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character Identity System — Avery</title>
+<meta name="description" content="Character Identity System — a pitchbook of three illustrated character studies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fffdfc;
+    --ink:#1c1210;
+    --muted:#8a7a76;
+    --line:#efe3e0;
+    --red:#c8351f;
+    --red-deep:#9c2416;
+    --red-tint:#fbe2dd;
+    --serif:'Fraunces', serif;
+    --sans:'DM Sans', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    background:rgba(255,253,252,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{ font-family:var(--serif); font-weight:500; font-size:22px; }
+  .back-link{
+    font-size:14px; font-weight:500; color:var(--muted);
+    display:flex; align-items:center; gap:6px;
+    transition:color .2s ease;
+  }
+  .back-link:hover{color:var(--red);}
+
+  /* ---------- Header ---------- */
+  .case-header{
+    max-width:760px;
+    margin:0 auto;
+    padding:64px 32px 0;
+  }
+  .case-meta{
+    font-size:12px; letter-spacing:1.2px; text-transform:uppercase;
+    color:var(--muted); margin-bottom:10px;
+  }
+  .case-title{
+    font-family:var(--serif); font-optical-sizing:auto; font-weight:500;
+    font-size:clamp(28px, 4.4vw, 42px); line-height:1.25; margin:0 0 22px;
+  }
+  .case-header p{
+    font-size:15.5px; line-height:1.75; color:var(--muted); margin:0 0 12px; max-width:620px;
+  }
+
+  /* ---------- Info row ---------- */
+  .info-row{
+    max-width:760px; margin:40px auto 0; padding:0 32px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .info-row .label{
+    font-size:11px; letter-spacing:1.2px; text-transform:uppercase;
+    color:var(--muted); margin-bottom:6px;
+  }
+  .info-row .value{ font-size:15px; line-height:1.6; }
+
+  /* ---------- Artworks ---------- */
+  .artworks{
+    max-width:760px; margin:70px auto 0; padding:0 32px;
+    display:flex; flex-direction:column; gap:80px;
+  }
+  .artwork{
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .artwork-number{
+    font-family:var(--serif); font-style:italic; color:var(--red);
+    font-size:14px; letter-spacing:.3px;
+  }
+  .artwork-media{
+    border-radius:16px; overflow:hidden;
+    background:var(--red-tint);
+    aspect-ratio:5/4;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    cursor:pointer;
+  }
+  .artwork-media img{
+    width:100%; height:100%; object-fit:cover;
+  }
+  .artwork-media input[type="file"]{
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:0; cursor:pointer;
+  }
+  .artwork-media .upload-hint{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    color:var(--red-deep); font-size:13px; letter-spacing:.3px;
+    pointer-events:none;
+  }
+  .artwork-media .upload-hint svg{ width:26px; height:26px; }
+  .artwork-body h2{
+    font-family:var(--serif); font-optical-sizing:auto; font-weight:500;
+    font-size:22px; margin:0 0 10px;
+  }
+  .artwork-body p{
+    font-size:14.5px; line-height:1.75; color:var(--muted); margin:0;
+    max-width:600px;
+  }
+  .artwork-tags{
+    display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;
+  }
+  .artwork-tags span{
+    font-size:11px; letter-spacing:.4px; text-transform:uppercase;
+    color:var(--red-deep); background:var(--red-tint);
+    padding:5px 10px; border-radius:20px;
+  }
+
+  /* ---------- Process gallery ---------- */
+  .process-section{ max-width:760px; margin:100px auto 110px; padding:0 32px; }
+  .process-head{
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    padding-bottom:16px; margin-bottom:24px;
+    border-bottom:1px solid var(--line);
+  }
+  .process-title{ font-family:var(--serif); font-weight:600; font-size:19px; }
+  .process-project{ font-style:italic; color:var(--muted); font-size:14px; }
+  .process-eyebrow{
+    font-size:11px; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted);
+    white-space:nowrap;
+  }
+  .process-images{
+    display:grid; grid-template-columns:1fr 1fr; gap:12px;
+  }
+  .process-images.gallery-grid .process-img:nth-child(3){
+    grid-column:1 / -1; aspect-ratio:16/7.5;
+  }
+  .process-img{
+    position:relative; border-radius:10px; overflow:hidden;
+    aspect-ratio:4/3;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  .process-img img.uploaded-photo{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  }
+  .process-img input[type="file"]{
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:0; cursor:pointer;
+  }
+  .process-img svg.deco-icon{ width:44px; height:44px; opacity:0.55; pointer-events:none; }
+  .process-badge{
+    position:absolute; top:10px; left:10px;
+    width:26px; height:26px;
+    background:rgba(20,14,13,0.65); color:#fff;
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:600;
+  }
+  .process-caption{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:28px;
+    margin-top:20px;
+  }
+  .process-caption .desc{ font-size:14px; line-height:1.7; color:var(--muted); margin:0; }
+  .process-caption ol{ margin:0; padding:0; list-style:none; }
+  .process-caption li{
+    display:flex; gap:8px; font-size:14px; color:var(--ink);
+    margin-bottom:8px; line-height:1.5;
+  }
+  .process-caption li .n{ font-weight:700; flex-shrink:0; }
+
+  @media (max-width:640px){
+    .info-row{ grid-template-columns:1fr 1fr; row-gap:24px; }
+    .process-images{ grid-template-columns:1fr; }
+    .process-caption{ grid-template-columns:1fr; }
+    .artworks{ gap:56px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="logo" href="index.html">Avery</a>
+  <a class="back-link" href="index.html#work">← All work</a>
+</header>
+
+<section class="case-header">
+  <div class="case-meta">ILLUSTRATION · 2026</div>
+  <h1 class="case-title">Character Identity System</h1>
+  <p>A pitchbook built around three illustrated pieces, each developing a different facet of the same visual language — line weight, color logic, and how a crowd of characters can still read as individuals.</p>
+</section>
+
+<section class="info-row">
+  <div>
+    <div class="label">Medium</div>
+    <div class="value">Marker &amp; digital color</div>
+  </div>
+  <div>
+    <div class="label">Role</div>
+    <div class="value">Illustrator</div>
+  </div>
+  <div>
+    <div class="label">Timeline</div>
+    <div class="value">Ongoing</div>
+  </div>
+</section>
+
+<section class="artworks">
+
+  <div class="artwork">
+    <div class="artwork-number">Artwork 01</div>
+<div class="artwork-media">
+  <img src="disco2.jpg" alt="Illustrated ensemble of four dancing characters">
+</div>
+    <div class="artwork-body">
+      <h2>The ensemble</h2>
+      <p>The anchor piece for the system — four characters in motion, worked out so each one reads instantly from silhouette alone before you even get to color or costume.</p>
+      <div class="artwork-tags">
+     
+      </div>
+    </div>
+  </div>
+
+  <div class="artwork">
+    <div class="artwork-number">Artwork 02</div>
+    <label class="artwork-media" id="art2">
+  <img src="disco1.jpg" alt="Illustrated ensemble of four dancing characters">
+</div>
+    <div class="artwork-body">
+      <h2>The ensemble</h2>
+      <p>The anchor piece for the system — four characters in motion, worked out so each one reads instantly from silhouette alone before you even get to color or costume.</p>
+      <div class="artwork-tags">
+     
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="artwork">
+    <div class="artwork-number">Artwork 03</div>
+    <label class="artwork-media" id="art3">
+   <img src="disco3.jpg" alt="Illustrated ensemble of four dancing characters">
+</div>
+    <div class="artwork-body">
+      <h2>The ensemble</h2>
+      <p>The anchor piece for the system — four characters in motion, worked out so each one reads instantly from silhouette alone before you even get to color or costume.</p>
+      <div class="artwork-tags">
+     
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="process-section">
+
+  <div class="process-head">
+    <div class="process-title">Documenting progress</div>
+    <div class="process-project">Character Identity System</div>
+    <div class="process-eyebrow">Process documentation</div>
+  </div>
+
+  <div class="process-images gallery-grid" id="pImages">
+    <!-- filled by script -->
+  </div>
+
+  <div class="process-caption">
+    <p class="desc">Sketches, palette tests, and in-progress line work from building out the three pieces. Click any panel to drop in your own process shots.</p>
+    <ol>
+      <li><span class="n">1</span><span>Early thumbnail sketches for the ensemble pose</span></li>
+      <li><span class="n">2</span><span>Palette test sheet before locking the final colors</span></li>
+      <li><span class="n">3</span><span>Line work laid out flat before adding color</span></li>
+    </ol>
+  </div>
+
+</section>
+
+<script>
+  // ---------- Individual artwork upload slots (art2, art3) ----------
+  document.querySelector('.artworks').addEventListener('change', e => {
+    const input = e.target;
+    if (input.tagName !== 'INPUT' || input.type !== 'file' || !input.dataset.slot) return;
+    const file = input.files[0];
+    if (!file) return;
+    const zone = document.getElementById(input.dataset.slot);
+    const reader = new FileReader();
+    reader.onload = ev => {
+      zone.innerHTML = `<img src="${ev.target.result}" alt="Uploaded artwork">
+        <input type="file" accept="image/*" data-slot="${input.dataset.slot}" title="Replace artwork">`;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // ---------- Process gallery (3-photo cluster) ----------
+  const panels = [
+    { bg:'linear-gradient(160deg,#f6cdc4,#e7a99c)', icon:'<path d="M3 21l4-1 12-12-3-3L4 17l-1 4z" stroke="#1c1210" stroke-width="1.6" stroke-linejoin="round"/>' },
+    { bg:'linear-gradient(160deg,#fbe2dd,#f6cdc4)', icon:'<rect x="4" y="4" width="16" height="16" rx="2" stroke="#1c1210" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="#1c1210"/><path d="M4 16l5-5 4 4 3-3 4 4" stroke="#1c1210" stroke-width="1.6" stroke-linejoin="round"/>' },
+    { bg:'linear-gradient(160deg,#1c1210,#4a3532)', icon:'<rect x="3" y="6" width="18" height="12" rx="2" stroke="#fff" stroke-width="1.6"/><path d="M7 9h4M7 13h7" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>' }
+  ];
+
+  const uploadedImages = {};
+  const pImages = document.getElementById('pImages');
+
+  function renderImages(){
+    pImages.innerHTML = panels.map((p, i) => {
+      const uploaded = uploadedImages[i];
+      if (uploaded) {
+        return `
+          <div class="process-img">
+            <span class="process-badge">${i+1}</span>
+            <img class="uploaded-photo" src="${uploaded}" alt="Process photo ${i+1}">
+            <input type="file" accept="image/*" data-panel="${i}" title="Replace photo">
+          </div>`;
+      }
+      return `
+        <div class="process-img" style="background:${p.bg};">
+          <span class="process-badge">${i+1}</span>
+          <svg class="deco-icon" viewBox="0 0 24 24" fill="none">${p.icon}</svg>
+          <input type="file" accept="image/*" data-panel="${i}" title="Add your own photo">
+        </div>`;
+    }).join('');
+  }
+
+  pImages.addEventListener('change', e => {
+    const input = e.target;
+    if (input.tagName !== 'INPUT' || input.type !== 'file') return;
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      uploadedImages[input.dataset.panel] = ev.target.result;
+      renderImages();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  renderImages();
+</script>
+
+</body>
+</html>
