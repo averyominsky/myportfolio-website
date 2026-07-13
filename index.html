@@ -452,6 +452,49 @@
 
 
 
+.work-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.work-media img,
+.work-media video {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.work-media video {
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+
+.work-card:hover .work-media img {
+  opacity:0;
+}
+
+.work-card:hover .work-media video {
+  opacity:1;
+}
+.work-media img {
+  position:relative;
+  z-index:1;
+}
+
+.work-media video {
+  position:absolute;
+  inset:0;
+  z-index:2;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+
+
+
+
 </style>
 </head>
 <body>
@@ -508,16 +551,32 @@
 
     <div class="work-list">
 
-<a class="work-card" href="character.html">
+
+      
+
+
+ <a class="work-card" href="character.html">
   <div class="work-media">
-    <img src="disco2.jpg"
-         alt="Character illustration sheet — a set of hand-drawn figures for the identity system"
-         loading="lazy">
+
+    <img
+      src="disco1.jpg"
+      alt="Character illustration sheet"
+      loading="lazy"
+    >
+
+    <video muted loop playsinline preload="metadata">
+      <source src="discofilm.mp4" type="video/mp4">
+    </video>
+
   </div>
 
   <div class="work-meta">ILLUSTRATION · Spring 2026</div>
   <div class="work-title">Character Identity System</div>
 </a>
+
+
+
+
 
 
 
@@ -686,6 +745,31 @@
     scrollHint.classList.toggle('hide', nearBottom() || window.scrollY > 250);
   }, { passive:true });
 </script>
+
+
+
+
+
+
+<script>
+// ---------- Disco Video ----------
+document.querySelectorAll(".work-card").forEach(card => {
+  const video = card.querySelector("video");
+
+  if (!video) return;
+
+  card.addEventListener("mouseenter", () => {
+    video.play();
+  });
+
+  card.addEventListener("mouseleave", () => {
+    video.pause();
+    video.currentTime = 0;
+  });
+});
+</script>
+
+
 
 </body>
 </html>
