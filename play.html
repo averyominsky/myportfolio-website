@@ -3,31 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Play — Avery Ominsky</title>
+  <title>Play — Avery</title>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --muted: #666666;
-      --border: #e8e8e8;
-      --accent: #c1df70;
-      --radius: 20px;
-      --transition: 0.25s ease;
+      --bg: #fffdfc;
+      --ink: #1c1210;
+      --muted: #8a7a76;
+      --line: #efe3e0;
+      --red: #c8351f;
+      --red-deep: #9c2416;
+      --red-tint: #fbe2dd;
+      --serif: 'Fraunces', serif;
+      --sans: 'DM Sans', sans-serif;
+      --radius: 16px;
     }
 
     body {
       background: var(--bg);
-      color: var(--text);
-      font-family: "DM Sans", sans-serif;
-      font-weight: 300;
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -46,25 +48,32 @@
     /* ── TOPBAR ── */
     .topbar {
       position: sticky; top: 0; z-index: 200;
-      display: flex; align-items: center; justify-content: center;
-      padding: 22px 40px;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 32px;
+      background: rgba(255,253,252,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
       animation: fadeDown 0.5s ease both;
     }
-    .topbar-name { font-size: 0.95rem; font-weight: 500; }
+    .logo { font-family: var(--serif); font-weight: 500; font-size: 22px; }
+    .back-link {
+      font-size: 14px; font-weight: 500; color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+      transition: color .2s ease;
+    }
+    .back-link:hover { color: var(--red); }
+
     .menu-btn {
-      position: absolute; left: 32px;
       background: transparent; border: none; cursor: pointer;
-      font-size: 1.4rem; transition: transform 0.2s ease;
+      font-size: 1.2rem; color: var(--ink);
+      transition: transform 0.2s ease;
     }
     .menu-btn:active { transform: scale(0.9); }
 
     .dropdown-menu {
       position: fixed; top: 0; left: 0;
       width: 300px; height: 100vh;
-      background: white; border-right: 1px solid var(--border);
+      background: var(--bg); border-right: 1px solid var(--line);
       padding: 80px 18px 18px;
       display: flex; flex-direction: column; gap: 6px;
       transform: translateX(-100%);
@@ -74,51 +83,55 @@
     .dropdown-menu.active { transform: translateX(0); }
     .dropdown-menu a {
       padding: 12px 14px; border-radius: 12px;
-      transition: all 0.2s ease; font-size: 0.95rem;
+      transition: all 0.2s ease; font-size: 14.5px;
     }
-    .dropdown-menu a:hover { background: #f5f5f5; transform: translateX(6px); }
+    .dropdown-menu a:hover { background: var(--red-tint); color: var(--red-deep); transform: translateX(6px); }
     .menu-section {
-      font-size: 0.75rem; text-transform: uppercase;
-      letter-spacing: 0.08em; color: var(--muted);
-      padding: 14px 14px 4px;
+      font-family: var(--serif); font-style: italic;
+      font-size: 12px; color: var(--red);
+      padding: 16px 14px 4px;
     }
     .close-btn {
       position: absolute; left: 18px; top: 18px;
-      font-size: 22px; background: transparent; border: none;
-      cursor: pointer; color: var(--text);
+      font-size: 20px; background: transparent; border: none;
+      cursor: pointer; color: var(--ink);
     }
 
     /* ── PAGE HEADER ── */
     .play-header {
-      padding: 72px 7vw 48px;
-      border-bottom: 1px solid var(--border);
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 32px 40px;
       animation: fadeUp 0.7s ease both;
     }
-    .play-header-inner {
-      display: flex; align-items: flex-end;
-      justify-content: space-between; gap: 24px; flex-wrap: wrap;
+    .case-meta {
+      font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 10px;
     }
     .play-title {
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(3.5rem, 10vw, 8rem);
-      line-height: 0.92; font-weight: 400; letter-spacing: -0.02em;
+      font-family: var(--serif); font-optical-sizing: auto; font-weight: 500;
+      font-size: clamp(32px, 6vw, 56px); line-height: 1.1; margin: 0 0 18px;
     }
-    .play-title em { font-style: italic; color: var(--muted); }
+    .play-title em { font-style: italic; color: var(--red); }
     .play-desc {
-      max-width: 340px; font-size: 0.95rem;
-      line-height: 1.75; color: var(--muted); padding-bottom: 6px;
+      max-width: 480px; font-size: 15.5px;
+      line-height: 1.75; color: var(--muted);
     }
 
     /* ── GRID ── */
     .grid-stage {
-      padding: 60px 7vw 100px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 32px 110px;
       animation: fadeUp 0.9s ease both 0.1s;
     }
 
     .play-grid {
       columns: 3;
-      column-gap: 28px;
+      column-gap: 20px;
     }
+    @media (max-width: 900px) { .play-grid { columns: 2; } }
+    @media (max-width: 560px) { .play-grid { columns: 1; } }
 
     /* ── CARD ── */
     .card {
@@ -127,12 +140,12 @@
       height: auto;
       position: relative;
       border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: #fafafa;
+      border: 1px solid var(--line);
+      background: var(--red-tint);
       overflow: visible;
       cursor: pointer;
       break-inside: avoid;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
       animation: floatCard var(--float-dur, 5s) ease-in-out var(--float-delay, 0s) infinite alternate;
       transition: box-shadow 0.3s ease, border-color 0.25s;
       will-change: transform;
@@ -141,17 +154,17 @@
     @keyframes floatCard {
       from {
         transform: translateY(0) rotate(var(--rot-a, -0.35deg));
-        box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+        box-shadow: 0 6px 20px rgba(28,18,16,0.06);
       }
       to {
         transform: translateY(var(--float-y, -12px)) rotate(var(--rot-b, 0.35deg));
-        box-shadow: 0 18px 44px rgba(0,0,0,0.11);
+        box-shadow: 0 16px 38px rgba(28,18,16,0.10);
       }
     }
 
     .card:hover {
-      border-color: #bbb;
-      box-shadow: 0 24px 56px rgba(0,0,0,0.14) !important;
+      border-color: var(--red);
+      box-shadow: 0 22px 50px rgba(28,18,16,0.14) !important;
       animation-play-state: paused;
       transform: translateY(-14px) scale(1.02) rotate(0deg) !important;
       z-index: 50;
@@ -173,14 +186,14 @@
     }
 
     .card:hover .card-inner img {
-      filter: brightness(0.88);
+      filter: brightness(0.9);
       transform: scale(1.03);
     }
 
     /* ── HOVER OVERLAY ── */
     .card-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.52) 0%, transparent 55%);
+      background: linear-gradient(to top, rgba(28,18,16,0.6) 0%, transparent 55%);
       opacity: 0; transition: opacity 0.3s;
       display: flex; align-items: flex-end; padding: 16px;
       border-radius: calc(var(--radius) - 1px);
@@ -188,86 +201,70 @@
     }
     .card:hover .card-overlay { opacity: 1; }
     .card-tag {
-      background: var(--accent); color: var(--text);
-      font-size: 0.7rem; font-weight: 500;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 999px;
+      background: var(--red); color: #fff;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.4px; text-transform: uppercase;
+      padding: 5px 10px; border-radius: 999px;
     }
+    .card-tag em { font-style: italic; text-transform: none; }
 
-    /* ── EMPTY UPLOAD CARDS ── */
-   .card.empty {
-  display: none;
-}
+    .card.empty { display: none; }
 
     .card-label {
-      font-size: 0.72rem; color: var(--muted);
-      letter-spacing: 0.1em; text-transform: uppercase;
+      font-size: 11px; color: var(--muted);
+      letter-spacing: 1px; text-transform: uppercase;
     }
 
     /* ── REMOVE BTN (upload cards only) ── */
     .card-remove {
       position: absolute; top: 10px; right: 10px;
       width: 26px; height: 26px; border-radius: 50%;
-      background: white; border: 1px solid var(--border);
-      color: var(--text); font-size: 12px;
+      background: #fff; border: 1px solid var(--line);
+      color: var(--ink); font-size: 12px;
       display: none; align-items: center; justify-content: center;
       cursor: pointer; opacity: 0;
-      transition: opacity 0.2s, background 0.2s;
+      transition: opacity 0.2s, background 0.2s, color 0.2s;
       z-index: 10;
     }
     .card:hover .card-remove { opacity: 1; }
-    .card-remove:hover { background: #111; color: white; border-color: #111; }
+    .card-remove:hover { background: var(--red); color: #fff; border-color: var(--red); }
 
     .file-input { display: none; }
 
     /* ── LIGHTBOX ── */
-.lightbox {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(12px);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 1000;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-.lightbox.active {
-  opacity: 1; pointer-events: all;
-}
-.lightbox img {
-  max-width: 90vw; max-height: 90vh;
-  border-radius: 16px;
-  box-shadow: 0 32px 80px rgba(0,0,0,0.4);
-  transform: scale(0.92);
-  transition: transform 0.3s cubic-bezier(.23,1,.32,1);
-}
-.lightbox.active img {
-  transform: scale(1);
-}
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(28,18,16,0.8);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.active { opacity: 1; pointer-events: all; }
+    .lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      border-radius: 16px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+      transform: scale(0.92);
+      transition: transform 0.3s cubic-bezier(.23,1,.32,1);
+    }
+    .lightbox.active img { transform: scale(1); }
 
-
-
-/* ── FOOTER ── */
+    /* ── FOOTER ── */
     .play-footer {
-      padding: 32px 7vw;
-      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 32px;
+      border-top: 1px solid var(--line);
       display: flex; align-items: center; justify-content: space-between;
-      font-size: 0.85rem; color: var(--muted);
+      font-size: 13px; color: var(--muted);
     }
     .play-footer a {
-      color: var(--text); font-weight: 500;
-      text-decoration: underline; text-underline-offset: 3px;
+      color: var(--ink); font-weight: 500;
+      transition: color .2s ease;
     }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .play-grid { columns: 2; column-gap: 20px; }
-      .card { margin-bottom: 20px; }
-      .play-header-inner { flex-direction: column; align-items: flex-start; }
-    }
-    @media (max-width: 480px) {
-      .play-grid { columns: 1; }
-      .grid-stage, .play-header { padding-inline: 20px; }
-    }
+    .play-footer a:hover { color: var(--red); }
   </style>
 </head>
 
@@ -275,12 +272,12 @@
   <img id="lightboxImg" src="" alt="Enlarged view" />
 </div>
 
-
 <body>
 
   <!-- TOPBAR -->
-  <div class="topbar">
-    <button class="menu-btn" id="menuToggle">☰</button>
+  <header class="topbar">
+    <a class="logo" href="index.html">Avery</a>
+    <button class="menu-btn" id="menuToggle">☰ Menu</button>
     <div class="dropdown-menu" id="dropdownMenu">
       <button class="close-btn" id="closeMenu">✕</button>
       <a href="play.html">Play</a>
@@ -295,18 +292,16 @@
       <a href="resume.pdf">Resume</a>
       <a href="https://linkedin.com">LinkedIn</a>
     </div>
-    <span class="topbar-name">Avery Ominsky</span>
-  </div>
+  </header>
 
   <!-- PAGE HEADER -->
-  <header class="play-header">
-    <div class="play-header-inner">
-      <h1 class="play-title">Play<em>.</em></h1>
-      <p class="play-desc">
-        A space for experiments, side projects, and things that don't fit anywhere else — but felt worth making.
-      </p>
-    </div>
-  </header>
+  <section class="play-header">
+    <div class="case-meta">EXPERIMENTS · ONGOING</div>
+    <h1 class="play-title">Play<em>.</em></h1>
+    <p class="play-desc">
+      A space for experiments, side projects, and things that don't fit anywhere else — but felt worth making.
+    </p>
+  </section>
 
   <!-- GRID -->
   <section class="grid-stage">
@@ -316,124 +311,116 @@
       <div class="card" style="--float-dur:5.2s;--float-delay:0s;--float-y:-12px;--rot-a:-0.4deg;--rot-b:0.35deg;">
         <div class="card-inner">
           <img src="seaartwork.jpeg" alt="Sea Artwork" />
-           <div class="card-overlay"><span class="card-tag"><em> Etchings of the Sea</em>, monotype and etching print, 1</span></div>
+           <div class="card-overlay"><span class="card-tag"><em>Etchings of the Sea</em>, monotype and etching print, 1</span></div>
         </div>
       </div>
 
       <div class="card" style="--float-dur:4.6s;--float-delay:0.6s;--float-y:-10px;--rot-a:0.3deg;--rot-b:-0.4deg;">
         <div class="card-inner">
           <img src="seaartwork2.jpeg" alt="Sea Artwork 2" />
-           <div class="card-overlay"><span class="card-tag"><em> Etchings of the Sea</em>, monotype and etching print, 2</span></div>
+           <div class="card-overlay"><span class="card-tag"><em>Etchings of the Sea</em>, monotype and etching print, 2</span></div>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="seaartwork3.jpeg" alt="Sea Artwork 3" />
-           <div class="card-overlay"><span class="card-tag"><em> Etchings of the Sea</em>, etching print</span></div>
+           <div class="card-overlay"><span class="card-tag"><em>Etchings of the Sea</em>, etching print</span></div>
         </div>
       </div>
 
-        <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="artworkweb.jpeg" alt="Artworkweb" />
            <div class="card-overlay"><span class="card-tag"><em>Blooming</em>, charcoal</span></div>
-
         </div>
       </div>
 
-          <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="shoe2.jpeg" alt="shoe2" />
-<div class="card-overlay"><span class="card-tag"><em>If the Shoe Fits</em>, life-size cardboard construction</span></div>
+           <div class="card-overlay"><span class="card-tag"><em>If the Shoe Fits</em>, life-size cardboard construction</span></div>
         </div>
       </div>
 
-
-         <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="shoe1.jpeg" alt="Shoe 2" />
-<div class="card-overlay"><span class="card-tag"><em>If the Shoe Fits</em>, life-size cardboard construction</span></div>
+           <div class="card-overlay"><span class="card-tag"><em>If the Shoe Fits</em>, life-size cardboard construction</span></div>
         </div>
       </div>
 
-             <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="Break Through 1.jpeg" alt="Break Through 1" />
            <div class="card-overlay"><span class="card-tag"><em>Break Through</em>, monotype print, 1</span></div>
         </div>
       </div>
 
-
-        <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="Break Through 2.jpeg" alt="Break Through 2" />
            <div class="card-overlay"><span class="card-tag"><em>Break Through</em>, monotype print, 2</span></div>
         </div>
       </div>
 
-<div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="play2.JPG" alt="play2" />
            <div class="card-overlay"><span class="card-tag"><em>Secret Garden</em>, Pen and Ink</span></div>
         </div>
       </div>
 
-
-
-    <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="play1.jpeg" alt="play" />
            <div class="card-overlay"><span class="card-tag"><em>Secret Garden</em>, Pen and Ink</span></div>
         </div>
       </div>
 
-      
-   <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="beachouse.jpg" alt="Beachouse" />
            <div class="card-overlay"><span class="card-tag"><em>Welcome to Our Beach House</em>, watercolor and micro pen</span></div>
         </div>
       </div>
-      
-        <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="play3.jpeg" alt="play3" />
            <div class="card-overlay"><span class="card-tag"><em>Secret Sea</em>, Pen and Ink</span></div>
         </div>
       </div>
 
-       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="comic.png" alt="comic" />
            <div class="card-overlay"><span class="card-tag"><em>Our grandma kissed a pumpkin</em>, Procreate</span></div>
         </div>
       </div>
 
-        <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="comic2.png" alt="comic2" />
            <div class="card-overlay"><span class="card-tag"><em>Cheese House</em>, Procreate, page 1</span></div>
         </div>
       </div>
 
-         <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
+      <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="comic3.png" alt="comic3" />
            <div class="card-overlay"><span class="card-tag"><em>Cheese House</em>, Procreate, page 2</span></div>
         </div>
       </div>
 
-
     </div><!-- end .play-grid; upload cards injected by JS below -->
   </section>
 
   <!-- FOOTER -->
   <footer class="play-footer">
-    <span>Avery Ominsky — Play</span>
+    <span>Avery — Play</span>
     <a href="index.html">← Back to portfolio</a>
   </footer>
-
 
   <script>
     /* ── MENU ── */
@@ -448,27 +435,25 @@
     });
 
     /* ── LIGHTBOX ── */
-const lightbox    = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
+    const lightbox    = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
 
-document.querySelectorAll('.card:not(.empty) img').forEach(img => {
-  img.style.cursor = 'zoom-in';
-  img.addEventListener('click', e => {
-    e.stopPropagation();
-    lightboxImg.src = img.src;
-    lightbox.classList.add('active');
-  });
-});
+    document.querySelectorAll('.card:not(.empty) img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', e => {
+        e.stopPropagation();
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
 
-lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') lightbox.classList.remove('active');
-});
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') lightbox.classList.remove('active');
+    });
 
-
-
-/* ── BUILD 15 UPLOAD CARDS ── */
+    /* ── BUILD 15 UPLOAD CARDS ── */
     const FLOATS = [
       { dur: '4.9s', delay: '1.2s', y: '-11px', ra: '0.4deg',   rb: '-0.3deg'  },
       { dur: '5.6s', delay: '0.8s', y: '-13px', ra: '-0.3deg',  rb: '0.45deg'  },
@@ -505,14 +490,12 @@ document.addEventListener('keydown', e => {
         <button class="card-remove" aria-label="Remove">✕</button>
       `;
 
-      /* click to upload */
       card.addEventListener('click', e => {
         if (e.target.closest('.card-remove')) return;
         activeCard = card;
         fileInput.click();
       });
 
-      /* remove button */
       card.querySelector('.card-remove').addEventListener('click', e => {
         e.stopPropagation();
         clearCard(card, i);
@@ -521,7 +504,6 @@ document.addEventListener('keydown', e => {
       grid.appendChild(card);
     });
 
-    /* ── FILE INPUT ── */
     fileInput.addEventListener('change', () => {
       if (fileInput.files.length && activeCard) {
         loadImage(activeCard, fileInput.files[0]);
@@ -530,7 +512,6 @@ document.addEventListener('keydown', e => {
       }
     });
 
-    /* ── LOAD IMAGE INTO CARD ── */
     function loadImage(card, file) {
       const reader = new FileReader();
       reader.onload = ev => {
@@ -551,7 +532,6 @@ document.addEventListener('keydown', e => {
       reader.readAsDataURL(file);
     }
 
-    /* ── CLEAR CARD ── */
     function clearCard(card, i) {
       const inner = card.querySelector('.card-inner');
       inner.innerHTML = `<span class="card-label">${String(i + 1).padStart(2, '0')}</span>`;
