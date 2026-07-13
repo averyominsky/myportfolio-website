@@ -307,22 +307,9 @@
 /* ---------- Development Images ---------- */
 
 #devAImages{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:12px;
-}
-
-#devAImages .process-img{
-  aspect-ratio:auto;
-  border-radius:10px;
-  overflow:hidden;
-}
-
-#devAImages .process-img img.uploaded-photo{
-  position:relative;
-  width:100%;
-  height:auto;
-  object-fit:contain;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
 }
 
 
@@ -501,7 +488,7 @@
   <div class="dialogue-grid" id="dialogueImages">
 
     <div class="dialogue-pair">
-      <span class="dialogue-number">Pairing 2</span>
+      <span class="dialogue-number">Pairing 1</span>
       <div class="process-img">
         <img class="uploaded-photo" src="progress3.jpg" alt="Character study, pairing 2">
       </div>
@@ -516,7 +503,7 @@
     </div>
 
     <div class="dialogue-pair">
-      <span class="dialogue-number">Pairing 3</span>
+      <span class="dialogue-number">Pairing 2</span>
       <div class="process-img">
         <img class="uploaded-photo" src="progress5.jpg" alt="Character study, pairing 3">
       </div>
@@ -531,7 +518,7 @@
     </div>
 
     <div class="dialogue-pair">
-      <span class="dialogue-number">Pairing 1</span>
+      <span class="dialogue-number">Pairing 3</span>
       <div class="process-img">
         <img class="uploaded-photo" src="progress1.jpg" alt="Character study, pairing 1">
       </div>
@@ -569,7 +556,7 @@
     </div>
 
     <div class="process-img">
-      <img class="uploaded-photo" src="drawingdisco3.jpeg" alt="Character development exploration">
+      <img class="uploaded-photo" src="drawingdisco3.jpg" alt="Character development exploration">
     </div>
 
   </div>
