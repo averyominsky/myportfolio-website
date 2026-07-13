@@ -210,7 +210,7 @@
     grid-template-columns:1fr 44px 1fr;
     align-items:center; gap:14px;
   }
-  .dialogue-pair .process-img{ aspect-ratio:1/1; }
+.dialogue-pair .process-img{ aspect-ratio:4/3; }
   .dialogue-connector{
     display:flex; align-items:center; justify-content:center;
     width:44px; height:44px; border-radius:50%;
@@ -224,6 +224,8 @@
     font-size:13px; margin-bottom:-8px;
   }
 
+  
+
   @media (max-width:640px){
     .info-row{ grid-template-columns:1fr 1fr; row-gap:24px; }
     .process-images{ grid-template-columns:1fr; }
@@ -235,6 +237,9 @@
     .dialogue-pair{ grid-template-columns:1fr; }
     .dialogue-connector{ transform:rotate(90deg); margin:0 auto; }
   }
+
+
+
 
 
 
@@ -268,6 +273,59 @@
     flex:1 1 100%;
   }
 }
+
+
+
+/* ---------- Source links ---------- */
+.source-links{
+  display:flex; gap:20px; flex-wrap:wrap;
+  margin-top:18px;
+}
+.source-link{
+  display:flex; align-items:center; gap:8px;
+}
+.source-icon{
+  width:22px; height:22px; border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif); font-weight:600; font-size:11px;
+  color:#fff; flex-shrink:0;
+}
+.source-text{ display:flex; flex-direction:column; gap:1px; }
+.source-name{
+  display:flex; align-items:center; gap:4px;
+  font-size:12.5px; font-weight:500; color:var(--ink);
+}
+.source-name svg{ width:10px; height:10px; color:var(--muted); }
+.source-sub{
+  font-size:10px; letter-spacing:.3px; text-transform:uppercase;
+  color:var(--muted);
+}
+.source-link:hover .source-name{ color:var(--red); }
+
+
+
+/* ---------- Development Images ---------- */
+
+#devAImages{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+}
+
+#devAImages .process-img{
+  aspect-ratio:auto;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+#devAImages .process-img img.uploaded-photo{
+  position:relative;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+
+
 
 
 </style>
@@ -395,7 +453,32 @@
   </div>
 </section>
 
+<!-- ---------- Research image sources ---------- -->
+<section class="gallery-section" style="margin-top:32px;">
+  <div class="source-links">
+    <a class="source-link" href="https://www.billboard.com/photos/studio-54-pictures/1-30-photos-from-studio-54s-prime/" target="_blank" rel="noopener">
+      <div class="source-icon" style="background:#1c1210;">B</div>
+      <div class="source-text">
+        <div class="source-name">
+          Billboard
+          <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="source-sub">Studio 54 photo archive</div>
+      </div>
+    </a>
 
+    <a class="source-link" href="https://www.gettyimages.com/photos/studio-54-1970s" target="_blank" rel="noopener">
+      <div class="source-icon" style="background:var(--red);">G</div>
+      <div class="source-text">
+        <div class="source-name">
+          Getty Images
+          <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="source-sub">Studio 54, 1970s</div>
+      </div>
+    </a>
+  </div>
+</section>
 
 <!-- ---------- Process work ---------- -->
 <section class="gallery-section">
@@ -414,18 +497,84 @@
     <div class="process-project">Character Identity System</div>
     <div class="process-eyebrow">Pairings &amp; comparisons</div>
   </div>
-  <div class="dialogue-grid" id="dialogueImages"></div>
-</section>
 
+  <div class="dialogue-grid" id="dialogueImages">
+
+    <div class="dialogue-pair">
+      <span class="dialogue-number">Pairing 2</span>
+      <div class="process-img">
+        <img class="uploaded-photo" src="progress3.jpg" alt="Character study, pairing 2">
+      </div>
+      <div class="dialogue-connector">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="process-img">
+        <img class="uploaded-photo" src="progress4.jpg" alt="Character study, pairing 2 counterpart">
+      </div>
+    </div>
+
+    <div class="dialogue-pair">
+      <span class="dialogue-number">Pairing 3</span>
+      <div class="process-img">
+        <img class="uploaded-photo" src="progress5.jpg" alt="Character study, pairing 3">
+      </div>
+      <div class="dialogue-connector">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="process-img">
+        <img class="uploaded-photo" src="progress6.jpg" alt="Character study, pairing 3 counterpart">
+      </div>
+    </div>
+
+    <div class="dialogue-pair">
+      <span class="dialogue-number">Pairing 1</span>
+      <div class="process-img">
+        <img class="uploaded-photo" src="progress1.jpg" alt="Character study, pairing 1">
+      </div>
+      <div class="dialogue-connector">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="process-img">
+        <img class="uploaded-photo" src="progress2.jpg" alt="Character study, pairing 1 counterpart">
+      </div>
+    </div>
+
+  </div>
+</section>\\\
 <!-- ---------- Development A ---------- -->
 <section class="gallery-section">
+
   <div class="process-head">
     <div class="process-title">Development</div>
     <div class="process-project">Character Identity System</div>
     <div class="process-eyebrow">Process &amp; development</div>
   </div>
-  <div class="process-images grid-3" id="devAImages"></div>
+
+  <div class="process-images grid-3" id="devAImages">
+
+
+
+    <div class="process-img">
+      <img class="uploaded-photo" src="drawingdisco1.jpeg" alt="Character development sketch">
+    </div>
+
+    <div class="process-img">
+      <img class="uploaded-photo" src="drawingdisco2.jpeg" alt="Character development process">
+    </div>
+
+    <div class="process-img">
+      <img class="uploaded-photo" src="drawingdisco3.jpeg" alt="Character development exploration">
+    </div>
+
+  </div>
 </section>
+
 
 <!-- ---------- Development B ---------- -->
 <section class="gallery-section">
@@ -512,7 +661,6 @@
 
   initSimpleGallery(document.getElementById('pImages'), 3);
   initSimpleGallery(document.getElementById('processWorkImages'), 4);
-  initSimpleGallery(document.getElementById('devAImages'), 3);
   initSimpleGallery(document.getElementById('devBImages'), 3);
 
   /* ---------- Dialogue gallery: 3 pairs, images speaking to each other ---------- */
@@ -521,33 +669,7 @@
     <path d="M20 16H10M10 16l3-3M10 16l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
 
-  (function initDialogueGallery(){
-    const el = document.getElementById('dialogueImages');
-    const store = {};
-    function render(){
-      el.innerHTML = Array.from({ length: 3 }, (_, i) => {
-        const aKey = `${i}a`, bKey = `${i}b`;
-        const a = panelHTML(i * 2,     store[aKey], `data-key="${aKey}"`);
-        const b = panelHTML(i * 2 + 1, store[bKey], `data-key="${bKey}"`);
-        return `<div class="dialogue-pair">
-          <span class="dialogue-number">Pairing ${i+1}</span>
-          ${a}
-          <div class="dialogue-connector">${dialogueConnector}</div>
-          ${b}
-        </div>`;
-      }).join('');
-    }
-    el.addEventListener('change', e => {
-      const input = e.target;
-      if (input.tagName !== 'INPUT' || input.type !== 'file') return;
-      const file = input.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => { store[input.dataset.key] = ev.target.result; render(); };
-      reader.readAsDataURL(file);
-    });
-    render();
-  })();
+
 </script>
 
 </body>
