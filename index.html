@@ -458,38 +458,12 @@
 }
 
 .work-media img,
+
 .work-media video {
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
-}
-
-.work-media video {
-  position:absolute;
-  inset:0;
-  opacity:0;
-  transition:opacity .3s ease;
-}
-
-.work-card:hover .work-media img {
-  opacity:0;
-}
-
-.work-card:hover .work-media video {
-  opacity:1;
-}
-.work-media img {
-  position:relative;
-  z-index:1;
-}
-
-.work-media video {
-  position:absolute;
-  inset:0;
-  z-index:2;
-  opacity:0;
-  transition:opacity .3s ease;
 }
 
 
@@ -564,9 +538,7 @@
       loading="lazy"
     >
 
-    <video muted loop playsinline preload="metadata">
-      <source src="discofilm.mp4" type="video/mp4">
-    </video>
+
 
   </div>
 
@@ -581,15 +553,25 @@
 
 
 
- <a class="work-card" href="#">
-         <div class="work-media">
-    <img src="invscitiesmockup.jpg" alt="Museum Quest interactive identity map" loading="lazy">
+<a class="work-card" href="#">
+
+  <div class="work-media">
+
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="cities.mp4" type="video/mp4">
+    </video>
+
   </div>
 
-  
   <div class="work-meta">UI & UX · Spring 2026</div>
+
   <div class="work-title">Book → Website</div>
-      </a>
+
+</a>
+
+
+
+
 
       
 <a class="work-card" href="#">
@@ -751,23 +733,7 @@
 
 
 
-<script>
-// ---------- Disco Video ----------
-document.querySelectorAll(".work-card").forEach(card => {
-  const video = card.querySelector("video");
 
-  if (!video) return;
-
-  card.addEventListener("mouseenter", () => {
-    video.play();
-  });
-
-  card.addEventListener("mouseleave", () => {
-    video.pause();
-    video.currentTime = 0;
-  });
-});
-</script>
 
 
 
