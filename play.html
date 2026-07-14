@@ -46,56 +46,164 @@
     }
 
     /* ── TOPBAR ── */
-    .topbar {
-      position: sticky; top: 0; z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 32px;
-      background: rgba(255,253,252,0.85);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
-      animation: fadeDown 0.5s ease both;
-    }
-    .logo { font-family: var(--serif); font-weight: 500; font-size: 22px; }
-    .back-link {
-      font-size: 14px; font-weight: 500; color: var(--muted);
-      display: flex; align-items: center; gap: 6px;
-      transition: color .2s ease;
-    }
-    .back-link:hover { color: var(--red); }
+   .topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 32px;
+  background:rgba(255,253,252,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
 
-    .menu-btn {
-      background: transparent; border: none; cursor: pointer;
-      font-size: 1.2rem; color: var(--ink);
-      transition: transform 0.2s ease;
-    }
-    .menu-btn:active { transform: scale(0.9); }
+.logo{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:22px;
+  letter-spacing:.2px;
+}
 
-    .dropdown-menu {
-      position: fixed; top: 0; left: 0;
-      width: 300px; height: 100vh;
-      background: var(--bg); border-right: 1px solid var(--line);
-      padding: 80px 18px 18px;
-      display: flex; flex-direction: column; gap: 6px;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      z-index: 999;
-    }
-    .dropdown-menu.active { transform: translateX(0); }
-    .dropdown-menu a {
-      padding: 12px 14px; border-radius: 12px;
-      transition: all 0.2s ease; font-size: 14.5px;
-    }
-    .dropdown-menu a:hover { background: var(--red-tint); color: var(--red-deep); transform: translateX(6px); }
-    .menu-section {
-      font-family: var(--serif); font-style: italic;
-      font-size: 12px; color: var(--red);
-      padding: 16px 14px 4px;
-    }
-    .close-btn {
-      position: absolute; left: 18px; top: 18px;
-      font-size: 20px; background: transparent; border: none;
-      cursor: pointer; color: var(--ink);
-    }
+.desktop-nav{
+  display:flex;
+  gap:28px;
+  font-size:14px;
+  font-weight:500;
+}
+
+.desktop-nav a{
+  position:relative;
+  padding:4px 0;
+  color:var(--muted);
+  transition:color .2s ease;
+}
+
+.desktop-nav a:hover{
+  color:var(--ink);
+}
+
+.desktop-nav a::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-2px;
+  width:0;
+  height:2px;
+  background:var(--red);
+  transition:width .25s ease;
+}
+
+.desktop-nav a:hover::after{
+  width:100%;
+}
+
+.menu-btn{
+  display:none;
+  background:none;
+  border:1px solid var(--line);
+  border-radius:8px;
+  width:38px;
+  height:38px;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.menu-btn span,
+.menu-btn span::before,
+.menu-btn span::after{
+  content:"";
+  display:block;
+  width:16px;
+  height:2px;
+  background:var(--ink);
+  position:relative;
+  transition:.25s;
+}
+
+.menu-btn span::before{
+  position:absolute;
+  top:-5px;
+}
+
+.menu-btn span::after{
+  position:absolute;
+  top:5px;
+}
+
+.menu-btn.open span{
+  background:transparent;
+}
+
+.menu-btn.open span::before{
+  transform:translateY(5px) rotate(45deg);
+}
+
+.menu-btn.open span::after{
+  transform:translateY(-5px) rotate(-45deg);
+}
+
+.mobile-nav{
+  position:fixed;
+  top:0;
+  right:0;
+  height:100%;
+  width:min(78vw,320px);
+  background:var(--bg);
+  border-left:1px solid var(--line);
+  transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.65,0,.35,1);
+  z-index:60;
+  padding:26px 28px;
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.mobile-nav.open{
+  transform:translateX(0);
+}
+
+.mobile-nav a{
+  font-family:var(--serif);
+  font-size:28px;
+}
+
+.close-btn{
+  align-self:flex-end;
+  background:none;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+  color:var(--muted);
+}
+
+.scrim{
+  position:fixed;
+  inset:0;
+  background:rgba(28,18,16,.25);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s;
+  z-index:55;
+}
+
+.scrim.open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+@media (max-width:760px){
+  .desktop-nav{
+    display:none;
+  }
+
+  .menu-btn{
+    display:flex;
+  }
+}
 
     /* ── PAGE HEADER ── */
     .play-header {
@@ -275,24 +383,30 @@
 <body>
 
   <!-- TOPBAR -->
-  <header class="topbar">
-    <a class="logo" href="index.html">Avery</a>
-    <button class="menu-btn" id="menuToggle">☰ Menu</button>
-    <div class="dropdown-menu" id="dropdownMenu">
-      <button class="close-btn" id="closeMenu">✕</button>
-      <a href="play.html">Play</a>
-      <div class="menu-section">Projects</div>
-      <a href="pitchbook.html">Character Identity System</a>
-      <a href="scanvas.html">Book → Website</a>
-      <a href="chick.html">Typography</a>
-      <div class="menu-section">About Me</div>
-      <a href="about.html">Learn About Me</a>
-      <div class="menu-section">Contact</div>
-      <a href="mailto:avery@example.com">Email</a>
-      <a href="resume.pdf">Resume</a>
-      <a href="https://linkedin.com">LinkedIn</a>
-    </div>
-  </header>
+ <div class="scrim" id="scrim"></div>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="close-btn" id="closeNav" aria-label="Close menu">✕</button>
+  <a href="index.html#work">Work</a>
+  <a href="play.html">Play</a>
+  <a href="index.html#about">About</a>
+  <a href="resume.pdf">CV</a>
+</div>
+
+<header class="topbar">
+  <a class="logo" href="index.html">Avery Ominsky</a>
+
+  <nav class="desktop-nav">
+    <a href="index.html#work">Work</a>
+    <a href="play.html">Play</a>
+    <a href="index.html#about">About</a>
+    <a href="resume.pdf">CV</a>
+  </nav>
+
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+    <span></span>
+  </button>
+</header>
 
   <!-- PAGE HEADER -->
   <section class="play-header">
@@ -424,16 +538,30 @@
 
   <script>
     /* ── MENU ── */
-    const menuToggle   = document.getElementById('menuToggle');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const closeMenuBtn = document.getElementById('closeMenu');
-    menuToggle.addEventListener('click', e => { e.stopPropagation(); dropdownMenu.classList.add('active'); });
-    closeMenuBtn.addEventListener('click', e => { e.stopPropagation(); dropdownMenu.classList.remove('active'); });
-    document.addEventListener('click', e => {
-      if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target))
-        dropdownMenu.classList.remove('active');
-    });
+ const menuBtn = document.getElementById("menuBtn");
+const mobileNav = document.getElementById("mobileNav");
+const closeNav = document.getElementById("closeNav");
+const scrim = document.getElementById("scrim");
 
+function openNav(){
+  mobileNav.classList.add("open");
+  scrim.classList.add("open");
+  menuBtn.classList.add("open");
+}
+
+function closeNavFn(){
+  mobileNav.classList.remove("open");
+  scrim.classList.remove("open");
+  menuBtn.classList.remove("open");
+}
+
+menuBtn.addEventListener("click", openNav);
+closeNav.addEventListener("click", closeNavFn);
+scrim.addEventListener("click", closeNavFn);
+
+document.querySelectorAll(".mobile-nav a").forEach(link=>{
+  link.addEventListener("click", closeNavFn);
+});
     /* ── LIGHTBOX ── */
     const lightbox    = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
