@@ -373,6 +373,122 @@
       transition: color .2s ease;
     }
     .play-footer a:hover { color: var(--red); }
+
+
+
+    /* ── FOOTER (shared site footer) ── */
+.footer-status-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  padding:6px 4px 0;
+}
+.footer-status-row .item{display:flex; flex-direction:column; gap:6px;}
+.footer-status-row .item.align-right{align-items:flex-end; text-align:right;}
+.footer-status-row .item span.label{
+  font-size:11px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.65);
+}
+.footer-status-row .item span.value{color:#fff; font-size:14px; font-weight:500;}
+
+#page{
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+#siteFooter{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.footer-inner{
+  max-width:1000px;
+  margin:0 auto;
+}
+
+.note-stack{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:8px;
+}
+.note-card-dark{
+  background:#141414;
+  color:#fff;
+  width:min(560px, 92%);
+  border-radius:16px;
+  padding:30px 34px 26px;
+  transform:rotate(-2deg);
+  box-shadow:0 22px 44px rgba(0,0,0,0.28);
+  position:relative;
+  z-index:2;
+}
+.note-label{
+  font-family:var(--sans);
+  font-size:11px;
+  letter-spacing:1.6px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+  margin:0 0 18px;
+}
+.note-line{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(17px, 2.4vw, 21px);
+  margin:0 0 16px;
+  padding-bottom:13px;
+  border-bottom:1px dashed rgba(255,255,255,0.28);
+}
+.note-line:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+
+.social-row{
+  display:flex;
+  position:relative;
+  z-index:3;
+  margin-top:-20px;
+}
+.social-tile{
+  width:60px; height:60px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--red);
+  border:2.5px solid #fff;
+  border-radius:14px;
+  margin:0 -8px;
+  transition:transform .2s ease;
+}
+.social-tile svg{width:24px; height:24px; fill:#fff;}
+.social-tile.t1{transform:rotate(-7deg);}
+.social-tile.t2{transform:rotate(4deg);}
+.social-tile.t3{transform:rotate(-3deg);}
+.social-tile.t4{transform:rotate(7deg);}
+.social-tile.t1:hover{transform:rotate(-7deg) translateY(-5px);}
+.social-tile.t2:hover{transform:rotate(4deg) translateY(-5px);}
+.social-tile.t3:hover{transform:rotate(-3deg) translateY(-5px);}
+.social-tile.t4:hover{transform:rotate(7deg) translateY(-5px);}
+
+.fine{
+  display:block;
+  text-align:center;
+  margin-top:22px;
+  font-size:12px;
+  opacity:0.65;
+}
+
+@media (max-width:640px){
+  .footer-status-row{flex-direction:row;}
+  .note-line{font-size:16px;}
+  .social-tile{width:50px; height:50px;}
+  .social-tile svg{width:20px; height:20px;}
+}
+
+
   </style>
 </head>
 
@@ -389,18 +505,17 @@
   <button class="close-btn" id="closeNav" aria-label="Close menu">✕</button>
   <a href="index.html#work">Work</a>
   <a href="play.html">Play</a>
-  <a href="index.html#about">About</a>
-  <a href="resume.pdf">CV</a>
+<a href="about.html">About</a>
 </div>
 
+<div id="page">
 <header class="topbar">
   <a class="logo" href="index.html">Avery Ominsky</a>
 
   <nav class="desktop-nav">
     <a href="index.html#work">Work</a>
     <a href="play.html">Play</a>
-    <a href="index.html#about">About</a>
-    <a href="resume.pdf">CV</a>
+<a href="about.html">About</a>
   </nav>
 
   <button class="menu-btn" id="menuBtn" aria-label="Open menu">
@@ -530,11 +645,56 @@
     </div><!-- end .play-grid; upload cards injected by JS below -->
   </section>
 
-  <!-- FOOTER -->
-  <footer class="play-footer">
-    <span>Avery — Play</span>
-    <a href="index.html">← Back to portfolio</a>
-  </footer>
+   </section>
+
+</div> <!-- End #page -->
+
+<!-- FOOTER -->
+<footer id="siteFooter">
+  <div class="footer-inner">
+
+    <div class="footer-status-row">
+      <div class="item">
+        <span class="label">Last updated</span>
+        <span class="value" id="lastUpdated">—</span>
+      </div>
+      <div class="item align-right">
+        <span class="label">Currently</span>
+        <span class="value" style="display:flex; align-items:center; gap:7px;">
+          <span id="weatherIcon" style="display:flex; width:16px; height:16px;"></span>
+          <span id="clock">Philadelphia, —:—</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="note-stack">
+      <div class="note-card-dark">
+        <p class="note-label">Note from Avery</p>
+        <p class="note-line">Hi, thank you for being here &lt;3</p>
+        <p class="note-line">Design, to me, is care made visible.</p>
+        <p class="note-line">If something here stayed with you,</p>
+        <p class="note-line">say hello@avery.design!</p>
+      </div>
+
+      <div class="social-row">
+        <a class="social-tile t1" href="mailto:hello@avery.design" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path d="M2 5h20v14H2V5zm2 2v.01L12 13l8-5.99V7H4zm16 3.24l-7.4 5.55a1 1 0 01-1.2 0L4 10.24V17h16v-6.76z"/></svg>
+        </a>
+        <a class="social-tile t2" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11.02 5 2.5 2.5 0 01-.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C21.9 8.65 23 11 23 14.5V21h-4v-5.8c0-1.38-.02-3.16-1.93-3.16-1.93 0-2.23 1.5-2.23 3.06V21h-4V9z"/></svg>
+        </a>
+        <a class="social-tile t3" href="#" target="_blank" rel="noopener" aria-label="Portfolio">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16v4H4V4zm0 6h7v10H4V10zm9 0h7v6h-7v-6zm0 8h7v2h-7v-2z"/></svg>
+        </a>
+        <a class="social-tile t4" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47a4.9 4.9 0 011.77 1.15 4.9 4.9 0 011.15 1.77c.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 01-1.15 1.77 4.9 4.9 0 01-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 01-1.77-1.15 4.9 4.9 0 01-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43a4.9 4.9 0 011.15-1.77A4.9 4.9 0 015.45 2.53c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.28 2 12 2zm0 2.7a5.3 5.3 0 100 10.6 5.3 5.3 0 000-10.6zm0 2a3.3 3.3 0 110 6.6 3.3 3.3 0 010-6.6zm5.5-1.9a1.24 1.24 0 100 2.48 1.24 1.24 0 000-2.48z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <span class="fine">© 2026 Avery Ominsky</span>
+  </div>
+</footer>
 
   <script>
     /* ── MENU ── */
@@ -581,22 +741,7 @@ document.querySelectorAll(".mobile-nav a").forEach(link=>{
       if (e.key === 'Escape') lightbox.classList.remove('active');
     });
 
-    // ---------- Auto last-updated date ----------
-  function updateLastModified(){
-    const d = new Date(document.lastModified);
-    const fmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    // Add ordinal suffix (1st, 2nd, 3rd, 10th, etc.)
-    const day = d.getDate();
-    const suffix = (day % 10 === 1 && day !== 11) ? 'st'
-                 : (day % 10 === 2 && day !== 12) ? 'nd'
-                 : (day % 10 === 3 && day !== 13) ? 'rd' : 'th';
-    const parts = fmt.formatToParts(d);
-    const month = parts.find(p => p.type === 'month').value;
-    const year = parts.find(p => p.type === 'year').value;
-    document.getElementById('lastUpdated').textContent = `${month} ${day}${suffix}, ${year}`;
-  }
-  updateLastModified();
-  
+
   
   /* ── BUILD 15 UPLOAD CARDS ── */
     const FLOATS = [
@@ -688,6 +833,87 @@ document.querySelectorAll(".mobile-nav a").forEach(link=>{
       card.classList.add('empty');
       card.querySelector('.card-remove').style.display = 'none';
     }
+
+
+    /* ── Weather icon (Philadelphia) ── */
+const WEATHER_SVGS = {
+  sun:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>',
+  moon:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 119.5 4a7 7 0 0010.5 10.5z"/></svg>',
+  cloud:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 18.5h-11z"/></svg>',
+  partly: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="8" r="3"/><path d="M7.5 3.3v1.2M3.6 8h1.2M4.9 4.9l.85.85M11.85 5l-.85.85"/><path d="M9.5 19.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0120.5 19.5h-11z"/></svg>',
+  fog:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M3 12h18M4 16h16M6 20h12"/></svg>',
+  drizzle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 14.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 14.5h-11z"/><path d="M8 18v2M12 18v2M16 18v2"/></svg>',
+  rain:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 13.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 13.5h-11z"/><path d="M7.5 17.5l-1.2 2.6M12 17.5l-1.2 2.6M16.5 17.5l-1.2 2.6"/></svg>',
+  snow:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 13.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 13.5h-11z"/><path d="M8 18v2.4M8 20.4l1-.7M8 20.4l-1-.7M12 18v2.4M12 20.4l1-.7M12 20.4l-1-.7M16 18v2.4M16 20.4l1-.7M16 20.4l-1-.7"/></svg>',
+  storm:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 12.5h-11z"/><path d="M12.5 16l-2.5 3.2h2.6L11 22.5"/></svg>'
+};
+
+function weatherIconKey(code, isDay){
+  if (code === 0) return isDay ? 'sun' : 'moon';
+  if (code === 1 || code === 2) return isDay ? 'partly' : 'moon';
+  if (code === 3) return 'cloud';
+  if (code === 45 || code === 48) return 'fog';
+  if ([51,53,55,56,57].includes(code)) return 'drizzle';
+  if ([61,63,65,66,67,80,81].includes(code)) return 'rain';
+  if ([71,73,75,77,85,86].includes(code)) return 'snow';
+  if ([82,95,96,99].includes(code)) return 'storm';
+  return 'cloud';
+}
+
+async function updateWeather(){
+  try {
+    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9526&longitude=-75.1652&current=weather_code,is_day');
+    const data = await res.json();
+    const key = weatherIconKey(data.current.weather_code, data.current.is_day === 1);
+    document.getElementById('weatherIcon').innerHTML = WEATHER_SVGS[key];
+  } catch (e) {
+    document.getElementById('weatherIcon').innerHTML = '';
+  }
+}
+updateWeather();
+setInterval(updateWeather, 15 * 60 * 1000);
+
+/* ── Live clock (Philadelphia) ── */
+function updateClock(){
+  const now = new Date();
+  const fmt = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    hour: 'numeric', minute: '2-digit', hour12: true
+  });
+  document.getElementById('clock').textContent = 'Philadelphia, ' + fmt.format(now);
+}
+updateClock();
+setInterval(updateClock, 30000);
+
+/* ── Auto last-updated date ── */
+function updateLastModified(){
+  const d = new Date(document.lastModified);
+  const fmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const day = d.getDate();
+  const suffix = (day % 10 === 1 && day !== 11) ? 'st'
+               : (day % 10 === 2 && day !== 12) ? 'nd'
+               : (day % 10 === 3 && day !== 13) ? 'rd' : 'th';
+  const parts = fmt.formatToParts(d);
+  const month = parts.find(p => p.type === 'month').value;
+  const year = parts.find(p => p.type === 'year').value;
+  document.getElementById('lastUpdated').textContent = `${month} ${day}${suffix}, ${year}`;
+}
+updateLastModified();
+
+/* ── Footer sits fixed underneath; page reserves space so it's revealed at the end ── */
+const page = document.getElementById('page');
+const siteFooter = document.getElementById('siteFooter');
+
+function reserveFooterSpace(){
+  page.style.marginBottom = siteFooter.offsetHeight + 'px';
+}
+reserveFooterSpace();
+window.addEventListener('resize', reserveFooterSpace);
+window.addEventListener('load', reserveFooterSpace);
+
+
+
+
   </script>
 
 </body>
