@@ -536,7 +536,7 @@
       <circle cx="62" cy="46" r="3.2" fill="#fff"/>
       <path d="M40 60c3 3 7 4.5 10 4.5s7-1.5 10-4.5" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
     </svg>
-    Avery
+    Avery Ominsky
   </div>
   <div class="hint">tap anywhere to enter</div>
 </div>
@@ -546,18 +546,18 @@
   <button class="close-btn" id="closeNav" aria-label="Close menu">✕</button>
   <a href="#work">Work</a>
   <a href="play.html">Play</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
+<a href="about.html">About</a>
+  <a href="#contact">CV</a>
 </div>
 
 <div id="page">
 <header class="topbar">
-  <a class="logo" href="#top">Avery</a>
+  <a class="logo" href="#top">Avery Ominsky</a>
   <nav class="desktop-nav">
     <a href="#work">Work</a>
     <a href="play.html">Play</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+<a href="about.html">About</a>
+    <a href="#contact">CV</a>
   </nav>
   <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span></span></button>
 </header>
@@ -646,10 +646,13 @@
         <span class="label">Last updated</span>
         <span class="value" id="lastUpdated">July 10th, 2026</span>
       </div>
-      <div class="item align-right">
-        <span class="label">Currently</span>
-        <span class="value" id="clock">Philadelphia, —:—</span>
-      </div>
+   <div class="item align-right">
+  <span class="label">Currently</span>
+  <span class="value" style="display:flex; align-items:center; gap:7px;">
+    <span id="weatherIcon" style="display:flex; width:16px; height:16px;"></span>
+    <span id="clock">Philadelphia, —:—</span>
+  </span>
+</div>
     </div>
 
     <div class="note-stack">
@@ -729,6 +732,46 @@
   rolePill.addEventListener('click', cycleRole);
   rolePill.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); cycleRole(); } });
 
+  // ---------- Weather icon (Philadelphia) ----------
+  const WEATHER_SVGS = {
+    sun:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>',
+    moon:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 119.5 4a7 7 0 0010.5 10.5z"/></svg>',
+    cloud:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 18.5h-11z"/></svg>',
+    partly: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="8" r="3"/><path d="M7.5 3.3v1.2M3.6 8h1.2M4.9 4.9l.85.85M11.85 5l-.85.85"/><path d="M9.5 19.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0120.5 19.5h-11z"/></svg>',
+    fog:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M3 12h18M4 16h16M6 20h12"/></svg>',
+    drizzle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 14.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 14.5h-11z"/><path d="M8 18v2M12 18v2M16 18v2"/></svg>',
+    rain:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 13.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 13.5h-11z"/><path d="M7.5 17.5l-1.2 2.6M12 17.5l-1.2 2.6M16.5 17.5l-1.2 2.6"/></svg>',
+    snow:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 13.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 13.5h-11z"/><path d="M8 18v2.4M8 20.4l1-.7M8 20.4l-1-.7M12 18v2.4M12 20.4l1-.7M12 20.4l-1-.7M16 18v2.4M16 20.4l1-.7M16 20.4l-1-.7"/></svg>',
+    storm:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12.5a4 4 0 01-.5-7.97 5 5 0 019.6-1.87A4.5 4.5 0 0117.5 12.5h-11z"/><path d="M12.5 16l-2.5 3.2h2.6L11 22.5"/></svg>'
+  };
+
+  function weatherIconKey(code, isDay){
+    if (code === 0) return isDay ? 'sun' : 'moon';
+    if (code === 1 || code === 2) return isDay ? 'partly' : 'moon';
+    if (code === 3) return 'cloud';
+    if (code === 45 || code === 48) return 'fog';
+    if ([51,53,55,56,57].includes(code)) return 'drizzle';
+    if ([61,63,65,66,67,80,81].includes(code)) return 'rain';
+    if ([71,73,75,77,85,86].includes(code)) return 'snow';
+    if ([82,95,96,99].includes(code)) return 'storm';
+    return 'cloud';
+  }
+
+  async function updateWeather(){
+    try {
+      const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=39.9526&longitude=-75.1652&current=weather_code,is_day');
+      const data = await res.json();
+      const key = weatherIconKey(data.current.weather_code, data.current.is_day === 1);
+      document.getElementById('weatherIcon').innerHTML = WEATHER_SVGS[key];
+    } catch (e) {
+      document.getElementById('weatherIcon').innerHTML = '';
+    }
+  }
+  updateWeather();
+  setInterval(updateWeather, 15 * 60 * 1000);
+  
+  
+  
   // ---------- Live clock (Philadelphia) ----------
   function updateClock(){
     const now = new Date();

@@ -304,6 +304,29 @@
 
 
 
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+}
+
+.process-box {
+  position:relative;
+  aspect-ratio:4 / 3;
+  overflow:hidden;
+  border-radius:10px;
+}
+
+.process-box img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+
+
+
 /* ---------- Development Images ---------- */
 
 #devAImages{
@@ -343,7 +366,7 @@
   </div>
   <div>
     <div class="label">Timeline</div>
-    <div class="value">Ongoing</div>
+    <div class="value">Spring 2026</div>
   </div>
 </section>
 
@@ -394,10 +417,30 @@
     <div class="process-eyebrow">Process documentation</div>
   </div>
 
-  <div class="process-images gallery-grid" id="pImages"></div>
+  <div class="process-images gallery-grid" id="pImages">
+
+    <div class="process-box">
+      <span class="n">1</span>
+      <img src="disco6.jpg" alt="Character development process">
+    </div>
+
+    <div class="process-box">
+      <span class="n">2</span>
+      <img src="disco6.jpg" alt="Character development process">
+    </div>
+
+    <div class="process-box">
+      <span class="n">3</span>
+      <img src="disco6.jpg" alt="Character development process">
+    </div>
+
+  </div>
 
   <div class="process-caption">
-    <p class="desc">Sketches, palette tests, and in-progress line work from building out the three pieces. Click any panel to drop in your own process shots.</p>
+    <p class="desc">
+      Sketches, palette tests, and in-progress line work from building out the three pieces. Click any panel to drop in your own process shots.
+    </p>
+
     <ol>
       <li><span class="n">1</span><span>Early thumbnail sketches for the ensemble pose</span></li>
       <li><span class="n">2</span><span>Palette test sheet before locking the final colors</span></li>
@@ -405,6 +448,8 @@
     </ol>
   </div>
 </section>
+
+
 
 <!-- ---------- Research ---------- -->
 
