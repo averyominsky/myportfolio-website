@@ -201,31 +201,6 @@
     grid-template-columns:repeat(3, 1fr);
   }
 
-  /* Dialogue section — pairs of images "talking" to each other */
-  .dialogue-grid{
-    display:flex; flex-direction:column; gap:28px;
-  }
-  .dialogue-pair{
-    display:grid;
-    grid-template-columns:1fr 44px 1fr;
-    align-items:center; gap:14px;
-  }
-.dialogue-pair .process-img{ aspect-ratio:4/3; }
-  .dialogue-connector{
-    display:flex; align-items:center; justify-content:center;
-    width:44px; height:44px; border-radius:50%;
-    background:var(--red-tint); color:var(--red-deep);
-    flex-shrink:0;
-  }
-  .dialogue-connector svg{ width:20px; height:20px; }
-  .dialogue-number{
-    grid-column:1 / -1;
-    font-family:var(--serif); font-style:italic; color:var(--red);
-    font-size:13px; margin-bottom:-8px;
-  }
-
-  
-
   @media (max-width:640px){
     .info-row{ grid-template-columns:1fr 1fr; row-gap:24px; }
     .process-images{ grid-template-columns:1fr; }
@@ -234,8 +209,6 @@
     .grid-5 .process-img:nth-child(2), .grid-5 .process-img:nth-child(3){ grid-column:1; }
     .process-caption{ grid-template-columns:1fr; }
     .artworks{ gap:56px; }
-    .dialogue-pair{ grid-template-columns:1fr; }
-    .dialogue-connector{ transform:rotate(90deg); margin:0 auto; }
   }
 
 
@@ -308,22 +281,59 @@
   display:grid;
   grid-template-columns:repeat(3, 1fr);
   gap:12px;
+  align-items:start;   /* ← add this line */
 }
-
 .process-box {
   position:relative;
-  aspect-ratio:4 / 3;
   overflow:hidden;
   border-radius:10px;
 }
 
+.process-box .n {
+  position:absolute;
+  top:10px;
+  left:10px;
+  width:26px;
+  height:26px;
+  background:rgba(20,14,13,0.65);
+  color:#fff;
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:600;
+  z-index:1;
+}
+
 .process-box img {
   width:100%;
-  height:100%;
-  object-fit:cover;
+  height:auto;
   display:block;
 }
 
+
+
+/* ---------- Gallery — masonry, shape-of-image ---------- */
+.gallery-masonry{
+  columns:2 220px;
+  column-gap:12px;
+}
+.gallery-masonry .gallery-item{
+  break-inside:avoid;
+  margin-bottom:12px;
+  border-radius:10px;
+  overflow:hidden;
+}
+.gallery-masonry .gallery-item img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+@media (max-width:640px){
+  .gallery-masonry{ columns:1; }
+}
 
 
 
@@ -421,12 +431,12 @@
 
     <div class="process-box">
       <span class="n">1</span>
-      <img src="disco6.jpg" alt="Character development process">
+      <img src="disco7.jpg" alt="Character development process">
     </div>
 
     <div class="process-box">
       <span class="n">2</span>
-      <img src="disco6.jpg" alt="Character development process">
+      <img src="disco8.jpg" alt="Character development process">
     </div>
 
     <div class="process-box">
@@ -514,73 +524,32 @@
   </div>
 </section>
 
-<!-- ---------- Process work ---------- -->
+<!-- ---------- Gallery ---------- -->
 <section class="gallery-section">
   <div class="process-head">
-    <div class="process-title">Process work</div>
+    <div class="process-title">Gallery</div>
     <div class="process-project">Character Identity System</div>
-    <div class="process-eyebrow">Studies &amp; iterations</div>
+    <div class="process-eyebrow">Additional images</div>
   </div>
-  <div class="process-images grid-4" id="processWorkImages"></div>
+
+  <div class="gallery-masonry" id="galleryImages">
+    <div class="gallery-item">
+      <img src="sketch1.jpg" alt="Gallery image">
+    </div>
+    <div class="gallery-item">
+      <img src="sketch2.jpg" alt="Gallery image">
+    </div>
+    <div class="gallery-item">
+      <img src="sketch3.jpg" alt="Gallery image">
+    </div>
+    <div class="gallery-item">
+      <img src="sketch4.jpg" alt="Gallery image">
+    </div>
+  </div>
+  
 </section>
 
-<!-- ---------- In dialogue (paired images) ---------- -->
-<section class="gallery-section">
-  <div class="process-head">
-    <div class="process-title">In dialogue</div>
-    <div class="process-project">Character Identity System</div>
-    <div class="process-eyebrow">Pairings &amp; comparisons</div>
-  </div>
 
-  <div class="dialogue-grid" id="dialogueImages">
-
-    <div class="dialogue-pair">
-      <span class="dialogue-number">Pairing 1</span>
-      <div class="process-img">
-        <img class="uploaded-photo" src="progress3.jpg" alt="Character study, pairing 2">
-      </div>
-      <div class="dialogue-connector">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="process-img">
-        <img class="uploaded-photo" src="progress4.jpg" alt="Character study, pairing 2 counterpart">
-      </div>
-    </div>
-
-    <div class="dialogue-pair">
-      <span class="dialogue-number">Pairing 2</span>
-      <div class="process-img">
-        <img class="uploaded-photo" src="progress5.jpg" alt="Character study, pairing 3">
-      </div>
-      <div class="dialogue-connector">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="process-img">
-        <img class="uploaded-photo" src="progress6.jpg" alt="Character study, pairing 3 counterpart">
-      </div>
-    </div>
-
-    <div class="dialogue-pair">
-      <span class="dialogue-number">Pairing 3</span>
-      <div class="process-img">
-        <img class="uploaded-photo" src="progress1.jpg" alt="Character study, pairing 1">
-      </div>
-      <div class="dialogue-connector">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="process-img">
-        <img class="uploaded-photo" src="progress2.jpg" alt="Character study, pairing 1 counterpart">
-      </div>
-    </div>
-
-  </div>
-</section>\\\
 <!-- ---------- Development A ---------- -->
 <section class="gallery-section">
 
@@ -693,17 +662,7 @@
     render();
   }
 
-  initSimpleGallery(document.getElementById('pImages'), 3);
-  initSimpleGallery(document.getElementById('processWorkImages'), 4);
   initSimpleGallery(document.getElementById('devBImages'), 3);
-
-  /* ---------- Dialogue gallery: 3 pairs, images speaking to each other ---------- */
-  const dialogueConnector = `<svg viewBox="0 0 24 24" fill="none">
-    <path d="M4 8h10M14 8l-3-3M14 8l-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M20 16H10M10 16l3-3M10 16l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>`;
-
-
 </script>
 
 </body>
