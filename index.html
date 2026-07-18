@@ -61,7 +61,6 @@
     opacity:0;
     transform:translateY(10px);
     animation:introIn 1s ease forwards .15s;
-
   }
   @keyframes introIn{
     to{opacity:1; transform:translateY(0);}
@@ -353,48 +352,11 @@
     margin:0 auto;
   }
 
-  /* ---------- Rotated note card ---------- */
-  .note-stack{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    margin-top:8px;
-  }
-  .note-card-dark{
-    background:#141414;
-    color:#fff;
-    width:min(560px, 92%);
-    border-radius:16px;
-    padding:30px 34px 26px;
-    transform:rotate(-2deg);
-    box-shadow:0 22px 44px rgba(0,0,0,0.28);
-    position:relative;
-    z-index:2;
-  }
-  .note-label{
-    font-family:var(--sans);
-    font-size:11px;
-    letter-spacing:1.6px;
-    text-transform:uppercase;
-    color:rgba(255,255,255,0.5);
-    margin:0 0 18px;
-  }
-  .note-line{
-    font-family:var(--serif);
-    font-weight:400;
-    font-size:clamp(17px, 2.4vw, 21px);
-    margin:0 0 16px;
-    padding-bottom:13px;
-    border-bottom:1px dashed rgba(255,255,255,0.28);
-  }
-  .note-line:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
-
-  /* ---------- Overlapping social tiles ---------- */
+  /* ---------- Social tiles row ---------- */
   .social-row{
     display:flex;
-    position:relative;
-    z-index:3;
-    margin-top:-20px;
+    justify-content:center;
+    margin-top:28px;
   }
   .social-tile{
     width:60px; height:60px;
@@ -528,13 +490,9 @@
 
 <div id="intro" role="button" aria-label="Enter site" tabindex="0">
   <div class="intro-name">
-      <path d="M50 8C32 8 24 24 24 42c0 8 1 16 3 24 1 6 3 12 9 16 4 3 9 4 14 4s10-1 14-4c6-4 8-10 9-16 2-8 3-16 3-24C76 24 68 8 50 8Z" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
-      <circle cx="38" cy="46" r="3.2" fill="#fff"/>
-      <circle cx="62" cy="46" r="3.2" fill="#fff"/>
-      <path d="M40 60c3 3 7 4.5 10 4.5s7-1.5 10-4.5" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-    </svg>
     Avery Ominsky
   </div>
+  <div class="hint">tap anywhere to enter</div>
 </div>
 
 <div class="scrim" id="scrim"></div>
@@ -649,29 +607,19 @@
 </div>
     </div>
 
-    <div class="note-stack">
-      <div class="note-card-dark">
-        <p class="note-label">Note from Avery</p>
-        <p class="note-line">Hi, thank you for being here &lt;3</p>
-        <p class="note-line">Design, to me, is care made visible.</p>
-        <p class="note-line">If something here stayed with you,</p>
-        <p class="note-line">say hello@avery.design!</p>
-      </div>
-
-      <div class="social-row">
-        <a class="social-tile t1" href="mailto:hello@avery.design" aria-label="Email">
-          <svg viewBox="0 0 24 24"><path d="M2 5h20v14H2V5zm2 2v.01L12 13l8-5.99V7H4zm16 3.24l-7.4 5.55a1 1 0 01-1.2 0L4 10.24V17h16v-6.76z"/></svg>
-        </a>
-        <a class="social-tile t2" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11.02 5 2.5 2.5 0 01-.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C21.9 8.65 23 11 23 14.5V21h-4v-5.8c0-1.38-.02-3.16-1.93-3.16-1.93 0-2.23 1.5-2.23 3.06V21h-4V9z"/></svg>
-        </a>
-        <a class="social-tile t3" href="#" target="_blank" rel="noopener" aria-label="Portfolio">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16v4H4V4zm0 6h7v10H4V10zm9 0h7v6h-7v-6zm0 8h7v2h-7v-2z"/></svg>
-        </a>
-        <a class="social-tile t4" href="#" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47a4.9 4.9 0 011.77 1.15 4.9 4.9 0 011.15 1.77c.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 01-1.15 1.77 4.9 4.9 0 01-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 01-1.77-1.15 4.9 4.9 0 01-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43a4.9 4.9 0 011.15-1.77A4.9 4.9 0 015.45 2.53c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.28 2 12 2zm0 2.7a5.3 5.3 0 100 10.6 5.3 5.3 0 000-10.6zm0 2a3.3 3.3 0 110 6.6 3.3 3.3 0 010-6.6zm5.5-1.9a1.24 1.24 0 100 2.48 1.24 1.24 0 000-2.48z"/></svg>
-        </a>
-      </div>
+    <div class="social-row">
+      <a class="social-tile t1" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47a4.9 4.9 0 011.77 1.15 4.9 4.9 0 011.15 1.77c.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 01-1.15 1.77 4.9 4.9 0 01-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 01-1.77-1.15 4.9 4.9 0 01-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43a4.9 4.9 0 011.15-1.77A4.9 4.9 0 015.45 2.53c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.28 2 12 2zm0 2.7a5.3 5.3 0 100 10.6 5.3 5.3 0 000-10.6zm0 2a3.3 3.3 0 110 6.6 3.3 3.3 0 010-6.6zm5.5-1.9a1.24 1.24 0 100 2.48 1.24 1.24 0 000-2.48z"/></svg>
+      </a>
+      <a class="social-tile t2" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11.02 5 2.5 2.5 0 01-.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C21.9 8.65 23 11 23 14.5V21h-4v-5.8c0-1.38-.02-3.16-1.93-3.16-1.93 0-2.23 1.5-2.23 3.06V21h-4V9z"/></svg>
+      </a>
+      <a class="social-tile t3" href="mailto:hello@avery.design" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M2 5h20v14H2V5zm2 2v.01L12 13l8-5.99V7H4zm16 3.24l-7.4 5.55a1 1 0 01-1.2 0L4 10.24V17h16v-6.76z"/></svg>
+      </a>
+      <a class="social-tile t4" href="resume.pdf" target="_blank" rel="noopener" aria-label="Resume">
+        <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6V2zm8 1.5V8h4.5L14 3.5zM8 13h8v1.5H8V13zm0 4h8v1.5H8V17zm0-8h4v1.5H8V9z"/></svg>
+      </a>
     </div>
 
     <span class="fine">© 2026 Avery Ominsky</span>
@@ -705,6 +653,7 @@
   const roles = [
     { word:'a product designer', icon:'<path d="M4 16.5L14.5 6m0 0H8m6.5 0V12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>' },
     { word:'an illustrator', icon:'<path d="M12 19l7-7 3 3-7 7-3-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 2l7.5 7.5" stroke="currentColor" stroke-width="1.8"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/>' },
+    { word:'a print maker', icon:'<rect x="4" y="3" width="16" height="12" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M7 21h10M9 15v6M15 15v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' }
   ];
   let roleIndex = 0;
   const rolePill = document.getElementById('rolePill');
