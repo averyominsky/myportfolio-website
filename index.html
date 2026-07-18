@@ -61,9 +61,7 @@
     opacity:0;
     transform:translateY(10px);
     animation:introIn 1s ease forwards .15s;
-  }
-  #intro .avatar{
-    width:56px; height:56px;
+
   }
   @keyframes introIn{
     to{opacity:1; transform:translateY(0);}
@@ -530,7 +528,6 @@
 
 <div id="intro" role="button" aria-label="Enter site" tabindex="0">
   <div class="intro-name">
-    <svg class="avatar" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M50 8C32 8 24 24 24 42c0 8 1 16 3 24 1 6 3 12 9 16 4 3 9 4 14 4s10-1 14-4c6-4 8-10 9-16 2-8 3-16 3-24C76 24 68 8 50 8Z" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
       <circle cx="38" cy="46" r="3.2" fill="#fff"/>
       <circle cx="62" cy="46" r="3.2" fill="#fff"/>
@@ -538,7 +535,6 @@
     </svg>
     Avery Ominsky
   </div>
-  <div class="hint">tap anywhere to enter</div>
 </div>
 
 <div class="scrim" id="scrim"></div>
@@ -571,8 +567,8 @@
       </span>
     </h1>
     <span class="tap-note">↑ tap the tag</span>
-    <p style="margin-top:24px;">Working across interactive experience and print, currently designing exhibits and identity systems for <a class="inline-link" href="#" target="_blank" rel="noopener">ANU – Museum of the Jewish People</a>. Interested in how physical craft and screen-based interaction can hold the same idea.</p>
-    <p>Recently shipped a print-ready card set built entirely in code, and a mobile museum-quest prototype for exploring identity through artifact-scanning. When not on client work, tinkering on a personal portfolio and the odd character system.</p>
+    <p style="margin-top:24px;">Communication Design and Business of the Arts student at WashU in St. Louis, pursuing product design, digital experiences, and visual identity.</p>
+    <p>I leverage design to bridge traditional craft and technology. I embrace emerging AI tools to expand the creative process while keeping people at the center of every design.</p>
   </section>
 
   <section class="work" id="work">
@@ -709,7 +705,6 @@
   const roles = [
     { word:'a product designer', icon:'<path d="M4 16.5L14.5 6m0 0H8m6.5 0V12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>' },
     { word:'an illustrator', icon:'<path d="M12 19l7-7 3 3-7 7-3-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 2l7.5 7.5" stroke="currentColor" stroke-width="1.8"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/>' },
-    { word:'a print maker', icon:'<rect x="4" y="3" width="16" height="12" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M7 21h10M9 15v6M15 15v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>' }
   ];
   let roleIndex = 0;
   const rolePill = document.getElementById('rolePill');
