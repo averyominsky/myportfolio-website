@@ -247,42 +247,42 @@
       width: 100%;
       height: auto;
       position: relative;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: var(--red-tint);
-      overflow: visible;
       cursor: pointer;
       break-inside: avoid;
-      margin-bottom: 20px;
+      margin-bottom: 32px;
       animation: floatCard var(--float-dur, 5s) ease-in-out var(--float-delay, 0s) infinite alternate;
-      transition: box-shadow 0.3s ease, border-color 0.25s;
+      transition: transform 0.3s ease;
       will-change: transform;
     }
 
     @keyframes floatCard {
       from {
         transform: translateY(0) rotate(var(--rot-a, -0.35deg));
-        box-shadow: 0 6px 20px rgba(28,18,16,0.06);
       }
       to {
         transform: translateY(var(--float-y, -12px)) rotate(var(--rot-b, 0.35deg));
-        box-shadow: 0 16px 38px rgba(28,18,16,0.10);
       }
     }
 
     .card:hover {
-      border-color: var(--red);
-      box-shadow: 0 22px 50px rgba(28,18,16,0.14) !important;
       animation-play-state: paused;
-      transform: translateY(-14px) scale(1.02) rotate(0deg) !important;
-      z-index: 50;
+      transform: translateY(-6px) rotate(0deg) !important;
     }
 
     /* ── INNER WRAP ── */
     .card-inner {
-      border-radius: calc(var(--radius) - 1px);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--red-tint);
       overflow: hidden;
       position: relative;
+      box-shadow: 0 6px 20px rgba(28,18,16,0.06);
+      transition: box-shadow 0.3s ease, border-color 0.25s;
+    }
+
+    .card:hover .card-inner {
+      border-color: var(--red);
+      box-shadow: 0 20px 44px rgba(28,18,16,0.14);
     }
 
     /* ── IMAGE ── */
@@ -290,31 +290,31 @@
       display: block;
       width: 100%;
       height: auto;
-      transition: filter 0.3s ease, transform 0.4s cubic-bezier(.23,1,.32,1);
+      transition: transform 0.4s cubic-bezier(.23,1,.32,1);
     }
 
     .card:hover .card-inner img {
-      filter: brightness(0.9);
       transform: scale(1.03);
     }
 
-    /* ── HOVER OVERLAY ── */
-    .card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(28,18,16,0.6) 0%, transparent 55%);
-      opacity: 0; transition: opacity 0.3s;
-      display: flex; align-items: flex-end; padding: 16px;
-      border-radius: calc(var(--radius) - 1px);
-      pointer-events: none;
+    /* ── CAPTION (static, below image) ── */
+    .card-caption {
+      padding: 14px 2px 0;
     }
-    .card:hover .card-overlay { opacity: 1; }
-    .card-tag {
-      background: var(--red); color: #fff;
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 0.4px; text-transform: uppercase;
-      padding: 5px 10px; border-radius: 999px;
+    .card-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 16.5px;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 4px;
     }
-    .card-tag em { font-style: italic; text-transform: none; }
+    .card-sub {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
 
     .card.empty { display: none; }
 
@@ -525,7 +525,6 @@
 
   <!-- PAGE HEADER -->
   <section class="play-header">
-    <div class="case-meta">EXPERIMENTS · ONGOING</div>
     <h1 class="play-title">Play<em>.</em></h1>
     <p class="play-desc">
       A space for experiments, side projects, and things that don't fit anywhere else — but felt worth making.
@@ -540,105 +539,150 @@
       <div class="card" style="--float-dur:5.2s;--float-delay:0s;--float-y:-12px;--rot-a:-0.4deg;--rot-b:0.35deg;">
         <div class="card-inner">
           <img src="seaartwork.jpeg" alt="Sea Artwork" />
-           <div class="card-overlay"><span class="card-tag"><em>Etchings of the Sea</em>, monotype and etching print, 1</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Etchings of the Sea</p>
+          <p class="card-sub">Monotype and etching print, 1</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:4.6s;--float-delay:0.6s;--float-y:-10px;--rot-a:0.3deg;--rot-b:-0.4deg;">
         <div class="card-inner">
           <img src="seaartwork2.jpeg" alt="Sea Artwork 2" />
-           <div class="card-overlay"><span class="card-tag"><em>Etchings of the Sea</em>, monotype and etching print, 2</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Etchings of the Sea</p>
+          <p class="card-sub">Monotype and etching print, 2</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="seaartwork3.jpeg" alt="Sea Artwork 3" />
-           <div class="card-overlay"><span class="card-tag"><em>Etchings of the Sea</em>, etching print</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Etchings of the Sea</p>
+          <p class="card-sub">Etching print</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="artworkweb.jpeg" alt="Artworkweb" />
-           <div class="card-overlay"><span class="card-tag"><em>Blooming</em>, charcoal</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Blooming</p>
+          <p class="card-sub">Charcoal</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="shoe2.jpeg" alt="shoe2" />
-           <div class="card-overlay"><span class="card-tag"><em>If the Shoe Fits</em>, life-size cardboard construction</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">If the Shoe Fits</p>
+          <p class="card-sub">Life-size cardboard construction</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="shoe1.jpeg" alt="Shoe 2" />
-           <div class="card-overlay"><span class="card-tag"><em>If the Shoe Fits</em>, life-size cardboard construction</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">If the Shoe Fits</p>
+          <p class="card-sub">Life-size cardboard construction</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="Break Through 1.jpeg" alt="Break Through 1" />
-           <div class="card-overlay"><span class="card-tag"><em>Break Through</em>, monotype print, 1</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Break Through</p>
+          <p class="card-sub">Monotype print, 1</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="Break Through 2.jpeg" alt="Break Through 2" />
-           <div class="card-overlay"><span class="card-tag"><em>Break Through</em>, monotype print, 2</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Break Through</p>
+          <p class="card-sub">Monotype print, 2</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="play2.JPG" alt="play2" />
-           <div class="card-overlay"><span class="card-tag"><em>Secret Garden</em>, Pen and Ink</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Secret Garden</p>
+          <p class="card-sub">Pen and ink</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="play1.jpeg" alt="play" />
-           <div class="card-overlay"><span class="card-tag"><em>Secret Garden</em>, Pen and Ink</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Secret Garden</p>
+          <p class="card-sub">Pen and ink</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="beachouse.jpg" alt="Beachouse" />
-           <div class="card-overlay"><span class="card-tag"><em>Welcome to Our Beach House</em>, watercolor and micro pen</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Welcome to Our Beach House</p>
+          <p class="card-sub">Watercolor and micro pen</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="play3.jpeg" alt="play3" />
-           <div class="card-overlay"><span class="card-tag"><em>Secret Sea</em>, Pen and Ink</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Secret Sea</p>
+          <p class="card-sub">Pen and ink</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="comic.png" alt="comic" />
-           <div class="card-overlay"><span class="card-tag"><em>Our grandma kissed a pumpkin</em>, Procreate</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Our Grandma Kissed a Pumpkin</p>
+          <p class="card-sub">Procreate</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="comic2.png" alt="comic2" />
-           <div class="card-overlay"><span class="card-tag"><em>Cheese House</em>, Procreate, page 1</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Cheese House</p>
+          <p class="card-sub">Procreate, page 1</p>
         </div>
       </div>
 
       <div class="card" style="--float-dur:6.1s;--float-delay:0.2s;--float-y:-14px;--rot-a:-0.35deg;--rot-b:0.3deg;">
         <div class="card-inner">
           <img src="comic3.png" alt="comic3" />
-           <div class="card-overlay"><span class="card-tag"><em>Cheese House</em>, Procreate, page 2</span></div>
+        </div>
+        <div class="card-caption">
+          <p class="card-title">Cheese House</p>
+          <p class="card-sub">Procreate, page 2</p>
         </div>
       </div>
 
@@ -776,7 +820,6 @@ document.querySelectorAll(".mobile-nav a").forEach(link=>{
         <div class="card-inner">
           <span class="card-label">${String(i + 1).padStart(2, '0')}</span>
         </div>
-        <div class="card-overlay"><span class="card-tag">play</span></div>
         <button class="card-remove" aria-label="Remove">✕</button>
       `;
 
@@ -813,9 +856,6 @@ document.querySelectorAll(".mobile-nav a").forEach(link=>{
         img.src = ev.target.result;
         inner.appendChild(img);
 
-        const ov = card.querySelector('.card-overlay');
-        inner.appendChild(ov);
-
         card.classList.remove('empty');
         card.querySelector('.card-remove').style.display = 'flex';
       };
@@ -825,10 +865,6 @@ document.querySelectorAll(".mobile-nav a").forEach(link=>{
     function clearCard(card, i) {
       const inner = card.querySelector('.card-inner');
       inner.innerHTML = `<span class="card-label">${String(i + 1).padStart(2, '0')}</span>`;
-
-      if (!card.querySelector('.card-overlay')) {
-        card.insertAdjacentHTML('beforeend', `<div class="card-overlay"><span class="card-tag">play</span></div>`);
-      }
 
       card.classList.add('empty');
       card.querySelector('.card-remove').style.display = 'none';
