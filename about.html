@@ -208,30 +208,31 @@
     transform:scale(1.04);
   }
 
-  /* ---------- Hand-drawn "hi" doodle ---------- */
-  .hi-doodle{
-    position:absolute;
-    left:32px;
-    bottom:34px;
-    display:flex;
-    align-items:flex-end;
-    gap:6px;
-    color:var(--red);
-    pointer-events:none;
-  }
-  .hi-doodle svg{width:34px; height:44px;}
-  .hi-doodle span{
-    font-family:'DM Sans', monospace;
-    font-weight:700;
-    letter-spacing:1.5px;
-    font-size:13px;
-    padding-bottom:2px;
-  }
+  .footer-contact{
+  text-align:center;
+  margin-top:50px;
+  font-size:12px;
+  letter-spacing:.4px;
+  opacity:.85;
+}
 
-  @media (max-width:640px){
-    .about-strip figure{ width:78vw; height:220px; }
-    .hi-doodle{ display:none; }
-  }
+.footer-contact a{
+  color:#fff;
+  text-decoration:none;
+  transition:opacity .2s ease;
+}
+
+.footer-contact a:hover{
+  opacity:.65;
+}
+
+.fine{
+  display:block;
+  text-align:center;
+  margin-top:12px;
+  font-size:12px;
+  opacity:0.65;
+}
 
   /* ---------- Footer status row (corners) ---------- */
   .footer-status-row{
@@ -293,13 +294,7 @@
   .social-tile.t3:hover{transform:rotate(-3deg) translateY(-5px);}
   .social-tile.t4:hover{transform:rotate(7deg) translateY(-5px);}
 
-  .fine{
-    display:block;
-    text-align:center;
-    margin-top:50px;
-    font-size:12px;
-    opacity:0.65;
-  }
+
 
   @media (max-width:640px){
     .footer-status-row{flex-direction:row;}
@@ -372,6 +367,12 @@
 </div>
     </div>
  
+    <div class="footer-contact">
+  <a href="mailto:averyominsky@gmail.com">averyominsky@gmail.com</a>
+  <span> | </span>
+  <a href="https://www.linkedin.com/in/avery-ominsky/" target="_blank">LinkedIn</a>
+</div>
+
     <span class="fine">© 2026 Avery Ominsky</span>
     
   </div>
