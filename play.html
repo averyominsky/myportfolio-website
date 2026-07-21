@@ -359,6 +359,36 @@
     }
     .lightbox.active img { transform: scale(1); }
 
+
+    .lightbox button{
+  position:absolute;
+  background:none;
+  border:none;
+  color:white;
+  font-size:40px;
+  cursor:pointer;
+  z-index:10;
+  padding:20px;
+}
+
+.lightbox-prev{
+  left:40px;
+}
+
+.lightbox-next{
+  right:40px;
+}
+
+.lightbox button:hover{
+  opacity:.7;
+}
+
+@media(max-width:700px){
+  .lightbox-prev{left:10px;}
+  .lightbox-next{right:10px;}
+}
+
+
     /* ── FOOTER ── */
     .play-footer {
       max-width: 1100px;
@@ -451,7 +481,9 @@
 </head>
 
 <div class="lightbox" id="lightbox">
+  <button class="lightbox-prev">←</button>
   <img id="lightboxImg" src="" alt="Enlarged view" />
+  <button class="lightbox-next">→</button>
 </div>
 
 <body>
@@ -701,23 +733,93 @@ document.querySelectorAll(".mobile-nav a").forEach(link=>{
   link.addEventListener("click", closeNavFn);
 });
     /* ── LIGHTBOX ── */
-    const lightbox    = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
+   const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
 
-    document.querySelectorAll('.card:not(.empty) img').forEach(img => {
-      img.style.cursor = 'zoom-in';
-      img.addEventListener('click', e => {
-        e.stopPropagation();
-        lightboxImg.src = img.src;
-        lightbox.classList.add('active');
-      });
-    });
+const galleryImages = [...document.querySelectorAll('.card:not(.empty) img')];
 
-    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+let currentIndex = 0;
 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') lightbox.classList.remove('active');
-    });
+
+// open image
+galleryImages.forEach((img,index)=>{
+  img.style.cursor = "zoom-in";
+
+  img.addEventListener('click', e=>{
+    e.stopPropagation();
+
+    currentIndex = index;
+    showImage();
+
+    lightbox.classList.add('active');
+  });
+});
+
+
+// show current image
+function showImage(){
+  lightboxImg.src = galleryImages[currentIndex].src;
+}
+
+
+// next image
+function nextImage(){
+  currentIndex++;
+
+  if(currentIndex >= galleryImages.length){
+    currentIndex = 0;
+  }
+
+  showImage();
+}
+
+
+// previous image
+function prevImage(){
+  currentIndex--;
+
+  if(currentIndex < 0){
+    currentIndex = galleryImages.length - 1;
+  }
+
+  showImage();
+}
+
+
+// buttons
+document.querySelector('.lightbox-next')
+.addEventListener('click', nextImage);
+
+document.querySelector('.lightbox-prev')
+.addEventListener('click', prevImage);
+
+
+// keyboard controls
+document.addEventListener('keydown', e=>{
+
+  if(!lightbox.classList.contains('active')) return;
+
+  if(e.key === "ArrowRight"){
+    nextImage();
+  }
+
+  if(e.key === "ArrowLeft"){
+    prevImage();
+  }
+
+  if(e.key === "Escape"){
+    lightbox.classList.remove('active');
+  }
+
+});
+
+
+// click outside image closes
+lightbox.addEventListener('click', e=>{
+  if(e.target === lightbox){
+    lightbox.classList.remove('active');
+  }
+});
 
 
   
