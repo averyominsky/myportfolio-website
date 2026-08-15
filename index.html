@@ -8,6 +8,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+ 
+<link rel="icon" type="image/png" href="circle.jpg">
+
+
+ <meta property="og:type" content="website">
+<meta property="og:url" content="https://averyominsky.github.io/myportfolio-website/index.html#work">
+<meta property="og:title" content="Avery Ominsky — Portfolio">
+
+<meta property="og:image" content="seaartwork.jpg">
+
+<meta property="og:description" content="Communication Design student exploring UI/UX, art, and technology..">
+
+
+
 <style>
   :root{
     --bg:#fffdfc;
@@ -719,17 +733,50 @@
   
   
   
-  // ---------- Live clock (Philadelphia) ----------
-  function updateClock(){
-    const now = new Date();
-    const fmt = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'America/New_York',
-      hour: 'numeric', minute: '2-digit', hour12: true
-    });
-    document.getElementById('clock').textContent = 'Philadelphia, ' + fmt.format(now);
-  }
-  updateClock();
-  setInterval(updateClock, 30000);
+// ---------- Live clock (Philadelphia) ----------
+function updateClock(){
+  const now = new Date();
+  const fmt = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
+
+  document.getElementById('clock').textContent =
+    'Philadelphia, ' + fmt.format(now);
+}
+
+updateClock();
+setInterval(updateClock, 30000);
+
+
+// ---------- Auto last-updated date ----------
+function updateLastModified(){
+  const d = new Date(document.lastModified);
+
+  const fmt = new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+
+  const day = d.getDate();
+
+  const suffix = (day % 10 === 1 && day !== 11) ? 'st'
+               : (day % 10 === 2 && day !== 12) ? 'nd'
+               : (day % 10 === 3 && day !== 13) ? 'rd'
+               : 'th';
+
+  const parts = fmt.formatToParts(d);
+  const month = parts.find(p => p.type === 'month').value;
+  const year = parts.find(p => p.type === 'year').value;
+
+  document.getElementById('lastUpdated').textContent =
+    `${month} ${day}${suffix}, ${year}`;
+}
+
+updateLastModified();
 
   // ---------- Footer sits fixed underneath; page reserves space so it's revealed at the end ----------
   const page = document.getElementById('page');
@@ -750,6 +797,12 @@
   window.addEventListener('scroll', ()=>{
     scrollHint.classList.toggle('hide', nearBottom() || window.scrollY > 250);
   }, { passive:true });
+
+
+
+
+
+
 </script>
 
 
