@@ -101,17 +101,22 @@
     font-family:var(--serif); font-style:italic; color:var(--red);
     font-size:14px; letter-spacing:.3px;
   }
-  .artwork-media{
-    border-radius:16px; overflow:hidden;
-    background:var(--red-tint);
-    aspect-ratio:5/4;
-    display:flex; align-items:center; justify-content:center;
-    position:relative;
-    cursor:pointer;
-  }
-  .artwork-media img{
-    width:100%; height:100%; object-fit:cover;
-  }
+ .artwork-media{
+  border-radius:16px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  cursor:pointer;
+}
+
+.artwork-media img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
   .artwork-media input[type="file"]{
     position:absolute; inset:0; width:100%; height:100%;
     opacity:0; cursor:pointer;
@@ -372,7 +377,7 @@
 <section class="case-header">
   <div class="case-meta">ILLUSTRATION · 2026</div>
   <h1 class="case-title">Character Identity System</h1>
-  <p>A pitchbook built around three illustrated pieces, each developing a different facet of the same visual language — line weight, color logic, and how a crowd of characters can still read as individuals.</p>
+  <p>I researched Studio 54 and its influence on disco culture in 1970s New York. Inspired by its glamour, energy, and iconic fashion, I used sequins, bold silhouettes, and expressive styling to capture the spirit of the disco era.</p>
 </section>
 
 <section class="info-row">
@@ -398,11 +403,10 @@
       <img src="disco2.jpg" alt="Illustrated ensemble of four dancing characters">
     </div>
     <div class="artwork-body">
-      <h2>Studio 54</h2>
-      <p>The anchor piece for the system — four characters in motion, worked out so each one reads instantly from silhouette alone before you even get to color or costume.</p>
-      <div class="artwork-tags"></div>
-    </div>
-  </div>
+     
+     <div class="artwork-tags"></div>
+  
+
 
   <div class="artwork">
     <div class="artwork-number">Artwork 02</div>
@@ -410,8 +414,6 @@
       <img src="disco1.jpg" alt="Illustrated ensemble of four dancing characters">
     </div>
     <div class="artwork-body">
-      <h2>The ensemble</h2>
-      <p>The anchor piece for the system — four characters in motion, worked out so each one reads instantly from silhouette alone before you even get to color or costume.</p>
       <div class="artwork-tags"></div>
     </div>
   </div>
@@ -423,7 +425,10 @@
     </div>
     <div class="artwork-body">
       <h2>The ensemble</h2>
-      <p>The anchor piece for the system — four characters in motion, worked out so each one reads instantly from silhouette alone before you even get to color or costume.</p>
+      <p>Initially, I explored sketches to determine how to portray the energy and exclusivity of Studio 54. I experimented with poses, spacing, and interactions, ultimately creating three scenes that capture the nightclub experience: the entrance, dance floor, and lounge.</p>
+      </div>
+       <p>As I refined my images, I developed stronger compositions, clearer details, and more intentional poses inspired by disco fashion and props. I experimented with marker, Micron pens, Sharpie, and Procreate, exploring how line, color, light, and shadow could support the story. I also focused on facial expressions and color contrast to create mood and visual emphasis. Finally, I scanned my sketches and transformed the black linework into pink, allowing me to develop a limited pink and yellow color palette.</p>
+      
       <div class="artwork-tags"></div>
     </div>
   </div>
@@ -457,9 +462,7 @@
   </div>
 
   <div class="process-caption">
-    <p class="desc">
-      Sketches, palette tests, and in-progress line work from building out the three pieces. Click any panel to drop in your own process shots.
-    </p>
+  
 
     <ol>
       <li><span class="n">1</span><span>Early thumbnail sketches for the ensemble pose</span></li>
@@ -537,7 +540,7 @@
 <!-- ---------- Gallery ---------- -->
 <section class="gallery-section">
   <div class="process-head">
-    <div class="process-title">Gallery</div>
+    <div class="process-title">Documenting progress</div>
     <div class="process-project">Character Identity System</div>
     <div class="process-eyebrow">Additional images</div>
   </div>
@@ -564,9 +567,9 @@
 <section class="gallery-section">
 
   <div class="process-head">
-    <div class="process-title">Development</div>
+    <div class="process-title">Refinements</div>
     <div class="process-project">Character Identity System</div>
-    <div class="process-eyebrow">Process &amp; development</div>
+    <div class="process-eyebrow">Additional images</div>
   </div>
 
   <div class="process-images grid-3" id="devAImages">
@@ -589,15 +592,7 @@
 </section>
 
 
-<!-- ---------- Development B ---------- -->
-<section class="gallery-section">
-  <div class="process-head">
-    <div class="process-title">Development, continued</div>
-    <div class="process-project">Character Identity System</div>
-    <div class="process-eyebrow">Process &amp; development</div>
-  </div>
-  <div class="process-images grid-3" id="devBImages"></div>
-</section>
+
 
 <script>
   /* ---------- Individual artwork upload slots ---------- */
