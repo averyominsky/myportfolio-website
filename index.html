@@ -471,6 +471,230 @@ html{
 
 
 
+/* ---------- Phone mockup for Insider Trading ---------- */
+/* ---------- Realistic iPhone Mockup ---------- */
+
+.phone-media {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+background: #dcecfa;
+  margin-bottom: 18px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.work-card:hover .phone-media {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(28,18,16,0.16);
+}
+
+
+/* PHONE BODY */
+
+.phone-frame {
+  height: 91%;
+  aspect-ratio: 9 / 19.5;
+
+  position: relative;
+
+  /* outer phone */
+  background: #171717;
+
+  border: 2px solid #333;
+
+  border-radius: 38px;
+
+  padding: 7px;
+
+  box-shadow:
+    0 25px 50px rgba(28,18,16,0.25),
+    0 8px 18px rgba(28,18,16,0.18),
+    inset 0 0 0 1px rgba(255,255,255,0.08);
+
+  overflow: visible;
+}
+
+
+/* SCREEN */
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 31px;
+
+  background: #fff;
+
+  /* glass edge */
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.18),
+    inset 0 0 8px rgba(0,0,0,0.12);
+}
+
+
+/* IMAGE / VIDEO INSIDE PHONE */
+
+.phone-screen img,
+.phone-screen video {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* ---------- Dynamic Island ---------- */
+
+.phone-frame::before {
+  content: '';
+
+  position: absolute;
+
+  top: 14px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 32%;
+  height: 18px;
+
+  background: #050505;
+
+  border-radius: 999px;
+
+  z-index: 10;
+
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.05),
+    0 1px 2px rgba(0,0,0,0.4);
+}
+
+
+/* ---------- Camera highlight ---------- */
+
+.phone-frame::after {
+  content: '';
+
+  position: absolute;
+
+  top: 20px;
+  right: 29%;
+
+  width: 4px;
+  height: 4px;
+
+  background: rgba(255,255,255,0.12);
+
+  border-radius: 50%;
+
+  z-index: 11;
+}
+
+
+/* ---------- Side buttons ---------- */
+
+.phone-frame {
+  --button-color: #252525;
+}
+
+
+/* volume buttons */
+
+.phone-frame .side-button {
+  position: absolute;
+
+  left: -4px;
+
+  width: 3px;
+
+  background: var(--button-color);
+
+  border-radius: 3px;
+}
+
+
+/* Create buttons using pseudo-elements */
+
+.phone-frame {
+  isolation: isolate;
+}
+
+.phone-frame .side-button {
+  display: none;
+}
+
+.phone-frame {
+  --dummy: none;
+}
+
+
+/* Left side buttons */
+
+.phone-frame::marker {
+  display: none;
+}
+
+
+/* ---------- Glass reflection ---------- */
+
+.phone-screen::after {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  border-radius: 31px;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255,255,255,0.08),
+      transparent 25%,
+      transparent 75%,
+      rgba(255,255,255,0.025)
+    );
+
+  z-index: 8;
+}
+
+
+/* ---------- Mobile sizing ---------- */
+
+@media (max-width: 640px) {
+
+  .phone-frame {
+    height: 88%;
+    border-radius: 32px;
+    padding: 6px;
+  }
+
+  .phone-screen {
+    border-radius: 26px;
+  }
+
+  .phone-frame::before {
+    top: 12px;
+    height: 15px;
+  }
+
+}.   
+
+
+
 
 
   /* ---------- character fade gallery ---------- */
@@ -594,6 +818,34 @@ html{
 </a>
 
 
+ <a class="work-card" href="#">
+
+  <a class="work-card" href="anu.html">
+
+  <div class="phone-media">
+
+    <div class="phone-frame">
+
+      <div class="phone-screen">
+
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="anu.mp4" type="video/mp4">
+        </video>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="work-meta">Mobile App · Summer 2026</div>
+
+  <div class="work-title">Rethinking the Museum Visit</div>
+
+</a>
+
+
+
 
 
       <div class="work-divider">More work, in development</div>
@@ -618,14 +870,11 @@ html{
 
 
 
-      <a class="work-card" href="#">
-        <div class="work-media">
-    <img src="insider.jpg" alt="Museum Quest interactive identity map" loading="lazy">
-  </div>
+     
 
-  <div class="work-meta">Typography & Editorial Design · Spring 2026</div>
-  <div class="work-title">Insider Trading Is Going to Get People Killed</div>
-      </a>
+
+
+
 
 
 
