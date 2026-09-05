@@ -165,7 +165,7 @@
       margin: 45px auto 0;
       padding: 25px 28px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
     }
@@ -293,32 +293,6 @@
 
 
     /* =========================
-       GUIDING QUESTION
-    ========================= */
-
-    .question {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 115px 28px 0;
-    }
-
-    .question-inner {
-      padding: 65px 55px;
-      border-top: 1px solid var(--ink);
-      border-bottom: 1px solid var(--ink);
-    }
-
-    .question-text {
-      max-width: 900px;
-      margin: 0;
-      font-family: "Fraunces", serif;
-      font-size: clamp(31px, 4vw, 48px);
-      line-height: 1.12;
-      letter-spacing: -0.035em;
-    }
-
-
-    /* =========================
        RESEARCH
     ========================= */
 
@@ -359,7 +333,7 @@
 
 
     /* =========================
-       COMPETITOR / INSPIRATION
+       COMPETITOR ANALYSIS
     ========================= */
 
     .split-section {
@@ -397,6 +371,62 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+    }
+
+
+    /* =========================
+       COMPETITOR COMPARISON
+    ========================= */
+
+    .comparison-wrapper {
+      margin-top: 65px;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .comparison-header,
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1.6fr 0.7fr 0.7fr;
+      align-items: center;
+    }
+
+    .comparison-header {
+      padding: 15px 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .comparison-row {
+      min-height: 58px;
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .comparison-row > div {
+      padding: 15px 10px;
+    }
+
+    .comparison-row > div:first-child {
+      padding-left: 0;
+    }
+
+    .comparison-x,
+    .comparison-plus {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .comparison-x {
+      color: var(--muted);
+    }
+
+    .comparison-plus {
+      color: var(--red);
     }
 
 
@@ -853,7 +883,6 @@
       .section,
       .section-wide,
       .problem-section,
-      .question,
       .split-section,
       .flow-section,
       .design-section,
@@ -869,7 +898,6 @@
 
       .section,
       .problem-section,
-      .question,
       .split-section,
       .flow-section,
       .design-section,
@@ -885,10 +913,6 @@
       .problem-card,
       .solution-card {
         padding: 35px 25px;
-      }
-
-      .question-inner {
-        padding: 45px 25px;
       }
 
       .research-grid {
@@ -940,6 +964,22 @@
         grid-template-columns: 1fr;
       }
 
+      /* Competitor comparison mobile */
+
+      .comparison-header,
+      .comparison-row {
+        grid-template-columns: 1.5fr 0.55fr 0.55fr;
+      }
+
+      .comparison-row {
+        min-height: 52px;
+        font-size: 13px;
+      }
+
+      .comparison-row > div {
+        padding: 12px 5px;
+      }
+
       footer {
         flex-direction: column;
         gap: 15px;
@@ -988,10 +1028,6 @@
         ← All work
       </a>
 
-      <div class="case-meta">
-        UX / MUSEUM EXPERIENCE · SUMMER 2026
-      </div>
-
       <h1 class="case-title">
         ANU Museum<br>
         Digital Companion
@@ -1025,12 +1061,17 @@
 
       <div class="info-item">
         <div class="info-label">Role</div>
-        <div class="info-value">UX / Product Designer</div>
+        <div class="info-value">Product Designer</div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-label">Medium</div>
+        <div class="info-value">Figma, VS Code</div>
       </div>
 
       <div class="info-item">
         <div class="info-label">Organization</div>
-        <div class="info-value">ANU Museum of the Jewish People</div>
+        <div class="info-value">ANU Museum, Tel Aviv</div>
       </div>
 
       <div class="info-item">
@@ -1053,103 +1094,19 @@
       </div>
 
       <h2>
-        Museums can be more than places to look at objects.
+        Rethinking the Museum Visit
       </h2>
 
       <p>
-        Museums are increasingly creating interactive experiences that
-        encourage visitors to actively participate, ask questions, and
-        create personal connections with what they see.
+        Families visiting the ANU Museum on their own may move passively
+        through the exhibits, feel overwhelmed by information, or struggle
+        to connect historical objects to their own lives, especially without
+        a guided tour to provide context. I saw an opportunity to rethink the
+        independent family visit by creating a self-guided interactive
+        “quest” experience that makes the museum more engaging, personal,
+        and meaningful while encouraging families to explore, discuss, and
+        connect with the objects they encounter.
       </p>
-
-      <p>
-        At ANU Museum of the Jewish People, I explored how a digital
-        experience could help families see themselves within the museum's
-        stories, objects, and history.
-      </p>
-
-    </section>
-
-
-
-    <!-- =========================
-         PROBLEM
-    ========================= -->
-
-    <section class="problem-section">
-
-      <div class="problem-card">
-
-        <div class="section-label">
-          The Problem
-        </div>
-
-        <h2>
-          Families can leave a museum knowing more facts — without feeling more connected.
-        </h2>
-
-        <p class="problem-intro">
-          Families visiting without access to a guided experience may be
-          challenged to engage deeply with objects, understand historical
-          context, and connect artifacts to their own lives.
-        </p>
-
-        <p class="problem-intro">
-          Visitors can become overwhelmed by information and move passively
-          through galleries, while families have limited opportunities to
-          discuss and reflect together. At the same time, staff cannot
-          personally guide every visitor.
-        </p>
-
-        <ul class="problem-list">
-
-          <li>
-            Visitors passively observe objects without meaningful interaction.
-          </li>
-
-          <li>
-            Visitors can feel overwhelmed by large amounts of information.
-          </li>
-
-          <li>
-            Historical objects can feel disconnected from personal identity.
-          </li>
-
-          <li>
-            Families have limited opportunities for conversation and reflection.
-          </li>
-
-          <li>
-            Museums need ways to guide visitors without requiring a staff member at every step.
-          </li>
-
-        </ul>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         GUIDING QUESTION
-    ========================= -->
-
-    <section class="question">
-
-      <div class="question-inner">
-
-        <div class="section-label">
-          Guiding Question
-        </div>
-
-        <p class="question-text">
-          How can ANU create a more engaging museum experience that helps
-          families connect Jewish history and personal identity through
-          interactive learning?
-        </p>
-
-      </div>
 
     </section>
 
@@ -1166,13 +1123,15 @@
       </div>
 
       <h2>
-        Before designing, I wanted to understand how families actually experience museums.
+        Competitor Analysis
       </h2>
 
       <p>
         I researched museum experiences, interactive games, and potential
         visitor behaviors to understand what could make a self-guided visit
-        more engaging.
+        more engaging. I looked at GooseChase as a reference for location-based scavenger hunts and interactive missions. While its format offered a strong foundation for exploration, it wasn't built specifically around ANU's collection, family learning, or personal identity.
+
+
       </p>
 
       <div class="research-grid">
@@ -1253,46 +1212,68 @@
     </section>
 
 
-
-    <!-- =========================
-         COMPETITOR ANALYSIS
-    ========================= -->
-
     <section class="split-section">
 
-      <div class="split-grid">
 
-        <div class="split-image">
 
-          <img
-            src="goose.jpeg"
-            alt="Competitor analysis and museum experience inspiration"
-          >
+         
 
+
+      </div>
+
+
+      <!-- =========================
+           COMPARISON TABLE
+      ========================= -->
+
+      <div class="comparison-wrapper">
+
+        <div class="comparison-header">
+          <div>Experience</div>
+          <div>GooseChase</div>
+          <div>ANU Quest</div>
         </div>
 
-        <div class="split-text">
+        <div class="comparison-row">
+          <div>Built specifically for ANU</div>
+          <div class="comparison-x">×</div>
+          <div class="comparison-plus">+</div>
+        </div>
 
-          <div class="small-label">
-            Competitor Analysis & Inspiration
-          </div>
+        <div class="comparison-row">
+          <div>Designed for family learning</div>
+          <div class="comparison-x">×</div>
+          <div class="comparison-plus">+</div>
+        </div>
 
-          <h2>
-            Looking at how other experiences make people want to participate.
-          </h2>
+        <div class="comparison-row">
+          <div>Connects heritage + identity</div>
+          <div class="comparison-x">×</div>
+          <div class="comparison-plus">+</div>
+        </div>
 
-          <p>
-            I looked at existing museum experiences, interactive games, and
-            identity-building activities to understand how visitors could be
-            encouraged to explore rather than simply read.
-          </p>
+        <div class="comparison-row">
+          <div>Built around ANU objects</div>
+          <div class="comparison-x">×</div>
+          <div class="comparison-plus">+</div>
+        </div>
 
-          <p>
-            This research helped me identify opportunities for missions,
-            challenges, collecting, rewards, and personal reflection within
-            the museum environment.
-          </p>
+        <div class="comparison-row">
+          <div>Encourages family discussion</div>
+          <div class="comparison-x">×</div>
+          <div class="comparison-plus">+</div>
+        </div>
 
+        <div class="comparison-row">
+          <div>Self-guided exploration</div>
+          <div class="comparison-plus">+</div>
+          <div class="comparison-plus">+</div>
+        </div>
+
+        <div class="comparison-row">
+          <div>Missions & challenges</div>
+          <div class="comparison-plus">+</div>
+          <div class="comparison-plus">+</div>
         </div>
 
       </div>
@@ -1931,7 +1912,8 @@
         </div>
 
         <h2>
-          Shifting the museum experience from learning about Jewish history to discovering where I fit within it.
+          Shifting the museum experience from learning about Jewish history
+          to discovering where I fit within it.
         </h2>
 
         <p>
